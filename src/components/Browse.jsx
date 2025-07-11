@@ -7,7 +7,7 @@ import SongsList from "./SongsList";
 // const apiEndpoint = "https://saavn.me/search/songs?query=";
 // const apiEndpoint = "https://saavn.dev/api/search/songs?query=";
 
-const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong }) => {
+const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong ,playSong}) => {
   console.log("BrowseMusic query:", query);
   console.log("BrowseMusic searchResults:", searchResults);
   // const [query, setQuery] = useState("");
@@ -16,58 +16,7 @@ const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong }) => 
   const [isPlaying, setIsPlaying] = useState(false);
   // const [currentSong, setCurrentSong] = useState(null);
   const audioRef = useRef(null);
-  // const handleSearch = async () => {
-
-  // useEffect(async () => {
-  //   if (query?.trim()) {
-
-  //   setLoading(true);
-  //   try {
-  //     const response = await fetch(
-  //       `${apiEndpoint}${encodeURIComponent(query)}`
-  //     );
-  //     const data1 = await response.json();
-  //     const data = data1.data;
-  //     console.log("Search results:", data);
-  //     if (data.results) {
-  //       console.log("Search results:", data.results);
-  //       setResults(data.results.slice(0, 20));
-  //     } else {
-  //       setResults([]);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching search results:", error);
-  //     setResults([]);
-  //   }
-  //   setLoading(false);
-  // }
-    
-  // }, []);
-
-  // };
-
-  // const handleKeyPress = (e) => {
-  //   if (e.key === "Enter") {
-  //     handleSearch();
-  //   }
-  // };
-
-  const toggleFavorite = (song) => {
-    const exists = favorites.find((s) => s.id === song.id);
-    if (exists) {
-      setFavorites(favorites.filter((s) => s.id !== song.id));
-    } else {
-      setFavorites([...favorites, song]);
-    }
-  };
-  const clickHandler = (song) => {
-    setCurrentSong(song);
-    console.log("Clicked song:", song);
-    // <PlaySong currentSong={song} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} />;
-  };
-
-
-  console.log(searchResults)
+ 
   
 
   return (
@@ -121,7 +70,7 @@ const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong }) => 
         {/* <SongsList  /> */}
         <SongsList
           songs={searchResults}
-          playSong={clickHandler}
+          playSong={playSong}
          
         />
       {/* </div> */}

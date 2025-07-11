@@ -5,12 +5,14 @@ import BrowseMusic from "./components/Browse";
 import FavoritesPage from "./components/Favorites";
 import PlaySong from "./components/PlaySong";
 import React, { useState, useRef } from "react";
-import Footer from "./components/Footer";
+
 import UserProfile from "./components/Profile";
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
+  const [songsList, setSongsList] = useState([]); // This state is not used in the current code
+  console.log("Songs List in App:", songsList);
   const [query, setQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  // const [searchResults, setSearchResults] = useState([]);
   console.log(query)
   console.log("Current song in App:", currentSong);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -28,9 +30,11 @@ function App() {
 };
   return (
     <>
-      <MusicNavbar currentSong={currentSong} setCurrentSong={setCurrentSong} 
+      <MusicNavbar 
+      songsList={songsList} setSongsList={setSongsList}
+      currentSong={currentSong} setCurrentSong={setCurrentSong} 
       query={query} setQuery={setQuery}
-      searchResults={searchResults} setSearchResults={setSearchResults}
+      // searchResults={searchResults} setSearchResults={setSearchResults}
       />
       {/* <HomePage /> */}
 
@@ -45,30 +49,32 @@ function App() {
               setIsPlaying={setIsPlaying}
               audioRef={audioRef}
               playSong={playSong}
+              songsList={songsList}
+              setSongsList={setSongsList}
             />
           }
         />
-        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/favorites" element={<FavoritesPage playSong={playSong} songsList={songsList} setSongsList={setSongsList} />} />
         {/* <Route path="/play/:id" element={<div>Play Song Page</div>} /> */}
-        <Route path="/browse" element={<BrowseMusic query={query} searchResults={searchResults}
+        <Route path="/browse" element={<BrowseMusic query={query} searchResults={songsList}
+        playSong={playSong}
         currentSong={currentSong} setCurrentSong={setCurrentSong} />} />
         <Route path="/user" element={<UserProfile user={dummyUser} />} />
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
       {currentSong && (
-        <PlaySong
+        <PlaySong   
           currentSong={currentSong}
+          setCurrentSong={setCurrentSong}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
           audioRef={audioRef}
+          songsList={songsList}
         />
       )}
 
 
-{/* <div className="bg-gray-100 min-h-screen pt-4"> */}
 
-      <Footer/>
-{/* </div> */}
     </>
   );
 }
