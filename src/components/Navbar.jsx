@@ -64,9 +64,9 @@ const MusicNavbar = ({
                 to="/"
                 className="flex-shrink-0 flex cursor-pointer  items-center text-blue-700 font-bold text-xl"
                 >
-                <i className="fa-solid fa-music"></i>
+                <img src="./src/assets/9973495.png" className="h-10" alt="" />
                 {/* strike line through hurts */}
-                <span className="ml-2">mth [music that <s>hurts</s> heals]</span>
+                <span className="ml-2">mth </span>
 
               </Link>
               <div className="w-2/4 bg-gray-200 backdrop-blur-xl  border-gray-300 rounded-full ">
