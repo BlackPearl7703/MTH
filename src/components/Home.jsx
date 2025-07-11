@@ -77,7 +77,8 @@ const HomePage = ({
         ">Listen again</h1>
       </div>
       <div className="w-full h-600px overflow-x-scroll flex gap-2  ">
-        {favoriteSongs.map((song, index) => (
+     { favoriteSongs.length? 
+      favoriteSongs.map((song, index) => (
           <div
             key={index}
             onClick={() => playSong(song)}
@@ -100,8 +101,12 @@ const HomePage = ({
             </p>
             </div>
           </div>
-        ))}
-
+        ))
+        :
+        <div>
+          <p className="text-gray-600">No favorites found. Hit thumbs up to add songs to favorites!</p>
+        </div>
+}
         {favLoading && (
           <div className="flex justify-center items-center h-64 w-full">
             <Loader />
