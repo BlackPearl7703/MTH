@@ -25,12 +25,12 @@ const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong ,playS
         <h1 className="text-3xl font-bold text-blue-700">
           Results for {query}
         </h1>
-        <Link
+        {/* <Link
           to="/favorites"
           className="text-blue-600 hover:underline font-medium"
         >
           View Favorites
-        </Link>
+        </Link> */}
       </div>
 
      
