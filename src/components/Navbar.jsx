@@ -64,7 +64,7 @@ const MusicNavbar = ({
                 to="/"
                 className="flex-shrink-0 flex cursor-pointer  items-center text-blue-700 font-bold text-xl"
                 >
-                <img src="./src/assets/9973495.png" className="h-10" alt="" />
+                <img src="/assets/9973495.png" className="h-10" alt="" />
                 {/* strike line through hurts */}
                 <span className="ml-2">mth </span>
 
