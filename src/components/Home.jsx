@@ -70,7 +70,7 @@ const HomePage = ({
   }, []);
 
   return (
-    <div className="bg-gray-300 min-h-screen px-6 py-12">
+    <div className="bg-gray-300 min-h-screen px-6 py-12 mb-12">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-blue-700
        
@@ -79,28 +79,59 @@ const HomePage = ({
       <div className="w-full h-600px overflow-x-scroll flex gap-2  ">
      { favoriteSongs.length? 
       favoriteSongs.map((song, index) => (
-          <div
-            key={index}
-            onClick={() => playSong(song)}
-            className="cursor-pointer min-w-2/12   bg-gray-50 hover:shadow-lg transition rounded-md shadow-md"
-          >
-            <img
-              src={song.image?.[song.image.length - 1]?.url}
-              alt={song.name}
-              className="w-full h-48 object-cover  mb-2"
-            />
-            <div className="px-2">
+         <div
+  key={index}
+  onClick={() => playSong(song)}
+  className="
+    cursor-pointer 
+    w-full
+    sm:w-3/4 
+    md:w-1/3 
+    lg:w-1/4 
+    xl:w-1/5 
+    sm:p-1
+    md:p-2
+    lg:p-2
+  "
+>
+  <div className="bg-gray-50 hover:shadow-lg transition rounded-md shadow-md h-full flex flex-col">
+    <img
+      src={song.image?.[song.image.length - 1]?.url}
+      alt={song.name}
+      className="
+        w-full 
+        h-48 
+        sm:h-40 
+        md:h-48 
+        lg:h-56 
+        object-cover 
+        rounded-t-md
+        mb-2
+      "
+    />
+    <div className="px-2 pb-3 flex-1 flex flex-col">
+      <h2 className="
+        text-blue-700 
+        font-semibold 
+        text-base 
+        sm:text-lg 
+        truncate
+      ">
+        {song.name}
+      </h2>
+      <p className="
+        text-gray-600 
+        text-xs 
+        sm:text-sm 
+        mt-1
+      ">
+        {song.artists?.primary?.map((a) => a.name).join(", ") ||
+          song.primaryArtists}
+      </p>
+    </div>
+  </div>
+</div>
 
-            <h2 className="text-blue-700 font-semibold text-lg truncate">
-              {song.name}
-            </h2>
-
-            <p className="text-gray-600 text-sm">
-               {song.artists?.primary?.map((a) => a.name).join(", ") ||
-              song.primaryArtists}
-            </p>
-            </div>
-          </div>
         ))
         :
         <div>

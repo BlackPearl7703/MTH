@@ -50,7 +50,7 @@ const SongsList = ({ songs, playSong, showIsLiked }) => {
         <div
           key={index}
           onClick={() => playSong(song)}
-          className="cursor-pointer backdrop-blur-lg  hover:shadow-lg transition rounded-lg shadow-md"
+          className="cursor-pointer bg-gray-100 backdrop-blur-lg  hover:shadow-lg transition rounded-lg shadow-md"
         >
           <img
             src={song.image?.[song.image.length - 1]?.url}
