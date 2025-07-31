@@ -1,19 +1,47 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-const SearchBar = ({ onSearch, placeholder = "Search music...", query, setQuery ,setSearchResults}) => {
+import axios from "axios";
+
+const SearchBar = ({
+  onSearch,
+  placeholder = "Wanna play some music...",
+  query,
+  setQuery,
+  setSearchResults,
+}) => {
   const navigate = useNavigate();
+  const [suggestions, setSuggestions] = useState([]);
+
+  console.log(query, "query in search bar");
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
+    const value = e.target.value;
+    setQuery(value);
+
+    if (!value.trim()) {
+      setSuggestions([]);
+      return;
+    }
+
+    const url = `http://localhost:3000/suggestion/${value}`;
+    axios
+      .get(url)
+      .then((response) => {
+        setSuggestions(response.data);
+        console.log("Search suggestions:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching search suggestions:", error);
+        setSuggestions([]);
+      });
   };
 
   const handleSearch = () => {
     if (query.trim()) {
       onSearch(query);
-      setSearchResults([])
-      navigate('/browse')
+      setSearchResults([]);
+      setSuggestions([]);
+      navigate("/browse");
     }
-    
   };
 
   const handleKeyPress = (e) => {
@@ -22,19 +50,45 @@ const SearchBar = ({ onSearch, placeholder = "Search music...", query, setQuery 
     }
   };
 
+  const handleSuggestionClick =  async (suggestion) => {
+   setQuery(suggestion,query=>handleSearch());
+    // handleSearch();
+  };
+
   return (
-   <div className="relative w-full bg-gray-50 rounded-full shadow-sm">
-  <input
-    type="text"
-    value={query}
-    onChange={handleInputChange}
-    onKeyDown={handleKeyPress}
-    placeholder={placeholder}
-    className="z-20 w-full pl-10 border-gray-100 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
-  />
-  <span className="absolute inset-y-0 left-0 flex items-center pl-3 ">
-    <i className="fa-solid fa-magnifying-glass"></i>
-  </span>
+    <div className="relative w-full max-w-xl mx-auto">
+  {/* Input Field with Icon */}
+  <div className="flex items-center bg-[#292524] rounded-lg px-4 py-2 shadow-sm focus-within:ring-2 focus-within:ring-blue-500">
+    <div className="text-gray-400 text-lg flex items-center">
+      <i className="fa-solid fa-magnifying-glass text-2xl"></i>
+    </div>
+    <input
+      type="text"
+      value={query}
+      onChange={handleInputChange}
+      onKeyDown={handleKeyPress}
+      // dynamic placeholder
+      placeholder={placeholder}
+      className="ml-3 py-1 text-xl flex-1 bg-transparent text-[#a8a29e]  focus:outline-none placeholder:text-gray-500"
+    />
+  </div>
+
+  {/* Suggestions Dropdown */}
+  {suggestions.length > 0 && (
+    <div className="absolute z-30 w-full bg-[#1c1917] border border-[#3f3f46] rounded-lg shadow-lg mt-2 max-h-60 overflow-y-auto text-white">
+      <ul className="divide-y divide-[#3f3f46]">
+        {suggestions.map((suggestion, index) => (
+          <li
+            key={index}
+            onClick={() => handleSuggestionClick(suggestion)}
+            className="cursor-pointer px-4 py-2 hover:bg-[#3f3f46] transition"
+          >
+            {suggestion}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
 </div>
 
   );

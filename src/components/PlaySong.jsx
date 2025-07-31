@@ -191,14 +191,14 @@ const togglePlayPause = () => {
     : 0;
 
   return (
- <div className=" flex flex-col justify-center items-center fixed bottom-0 left-0 right-0 bg-transparent backdrop-blur-xl shadow-inner  overflow-x-hidden ">
+ <div className=" flex flex-col justify-center items-center fixed bottom-0 left-0 right-0 bg-[#9ca3af] backdrop-blur-xl shadow-inner  overflow-x-hidden ">
   {/* Progress Bar at the very top */}
   <div
     className="h-2 w-full bg-gray-300 rounded cursor-pointer"
     onClick={handleSeek}
   >
     <div
-      className="h-2 bg-blue-600 rounded"
+      className="h-2 bg-[#e11d48] rounded"
       style={{ width: `${progressPercent}%` }}
     ></div>
   </div>

@@ -4,16 +4,17 @@ import { Routes, Route } from "react-router-dom";
 import BrowseMusic from "./components/Browse";
 import FavoritesPage from "./components/Favorites";
 import PlaySong from "./components/PlaySong";
-import React, { useState, useRef } from "react";
-
+import { useState, useRef } from "react";
+import SignUp from "./components/SignUp";
 import UserProfile from "./components/Profile";
+import Login from "./components/Login";
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
   const [songsList, setSongsList] = useState([]); // This state is not used in the current code
   console.log("Songs List in App:", songsList);
   const [query, setQuery] = useState("");
   // const [searchResults, setSearchResults] = useState([]);
-  console.log(query)
+  console.log(query);
   console.log("Current song in App:", currentSong);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
@@ -22,19 +23,22 @@ function App() {
     setIsPlaying(true);
     setTimeout(() => audioRef.current?.play(), 100); // Delay to allow src update
   };
-  const dummyUser = {
-  name: "Ayesha Khan",
-  email: "ayesha@example.com",
-  avatar: "https://i.pravatar.cc/150?img=3",
-  about: "Music enthusiast. Loves Bollywood classics and new indie tracks.",
-};
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") ? true : false);
+  const [userData, setUserData] = useState(localStorage.getItem("user")?? null);
+
   return (
     <>
-      <MusicNavbar 
-      songsList={songsList} setSongsList={setSongsList}
-      currentSong={currentSong} setCurrentSong={setCurrentSong} 
-      query={query} setQuery={setQuery}
-      // searchResults={searchResults} setSearchResults={setSearchResults}
+    <div className="bg-[#1f2937] min-h-screen text-white">
+
+   
+      <MusicNavbar
+        songsList={songsList}
+        setSongsList={setSongsList}
+        currentSong={currentSong}
+        setCurrentSong={setCurrentSong}
+        query={query}
+        setQuery={setQuery}
+        // searchResults={searchResults} setSearchResults={setSearchResults}
       />
       {/* <HomePage /> */}
 
@@ -43,6 +47,7 @@ function App() {
           path="/"
           element={
             <HomePage
+              userData={userData}
               currentSong={currentSong}
               setCurrentSong={setCurrentSong}
               isPlaying={isPlaying}
@@ -54,16 +59,44 @@ function App() {
             />
           }
         />
-        <Route path="/favorites" element={<FavoritesPage playSong={playSong} songsList={songsList} setSongsList={setSongsList} />} />
+        <Route
+          path="/favorites"
+          element={
+            <FavoritesPage
+              playSong={playSong}
+              songsList={songsList}
+              setSongsList={setSongsList}
+            />
+          }
+        />
         {/* <Route path="/play/:id" element={<div>Play Song Page</div>} /> */}
-        <Route path="/browse" element={<BrowseMusic query={query} searchResults={songsList}
-        playSong={playSong}
-        currentSong={currentSong} setCurrentSong={setCurrentSong} />} />
-        <Route path="/user" element={<UserProfile user={dummyUser} />} />
+        <Route
+          path="/browse"
+          element={
+            <BrowseMusic
+              query={query}
+              searchResults={songsList}
+              playSong={playSong}
+              currentSong={currentSong}
+              setCurrentSong={setCurrentSong}
+            />
+          }
+        />
+        <Route
+          path="/user"
+          element={isLoggedIn ? <UserProfile user={userData} /> : 
+          // <SignUp setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
+          <Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
+        }
+        />
+        <Route
+          path="/signup"
+          element={<SignUp setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />}
+        />
         <Route path="*" element={<div>404 Not Found</div>} />
       </Routes>
       {currentSong && (
-        <PlaySong   
+        <PlaySong
           currentSong={currentSong}
           setCurrentSong={setCurrentSong}
           isPlaying={isPlaying}
@@ -72,9 +105,7 @@ function App() {
           songsList={songsList}
         />
       )}
-
-
-
+       </div>
     </>
   );
 }

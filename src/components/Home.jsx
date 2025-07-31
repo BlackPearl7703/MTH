@@ -2,11 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import PlaySong from "./PlaySong"; // Import the PlaySong component
 const apiEndpoint = "https://saavn.dev/api/search/songs?query="; // Example query
 import { Link } from "react-router-dom"; // Import Link for navigation
-
+import { LikedSong } from "./LikedSong";
 import SongsList from "./SongsList";
 import Loader from "./loader/Loader";
+import { SingersSections } from "./SingersSections";
 import { fetchFavoritesSongsData } from "../helper-functions/fetchFavorites";
+import { singersData } from "../store/singersData";
 const HomePage = ({
+  userData,
   currentSong,
   setCurrentSong,
   isPlaying,
@@ -33,7 +36,7 @@ const HomePage = ({
         const data = await response.json();
         console.log("Fetched data:", data);
         if (data.data.results && data.data.results.length > 0) {
-          // assign o based index to songs 
+          // assign o based index to songs
           const songs = data.data.results.map((song, index) => ({
             ...song,
             songIndex: index + 1, // Assigning a 1-based index
@@ -58,7 +61,7 @@ const HomePage = ({
     const fetchFavorites = async () => {
       setFavLoading(true);
       const fetchedSongs = await fetchFavoritesSongsData(favorites);
-  //  add songIndex to each song
+      //  add songIndex to each song
       fetchedSongs.forEach((song, index) => {
         song.songIndex = index + 1; // Assigning a 1-based index
       });
@@ -70,74 +73,36 @@ const HomePage = ({
   }, []);
 
   return (
-    <div className="bg-gray-300 min-h-screen px-6 py-12 mb-12">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-blue-700
-       
-        ">Listen again</h1>
-      </div>
-      <div className="w-full h-600px overflow-x-scroll flex gap-2  ">
-     { favoriteSongs.length? 
-      favoriteSongs.map((song, index) => (
-         <div
-  key={index}
-  onClick={() => playSong(song)}
-  className="
-    cursor-pointer 
-    w-full
-    sm:w-3/4 
-    md:w-1/3 
-    lg:w-1/4 
-    xl:w-1/5 
-    sm:p-1
-    md:p-2
-    lg:p-2
-  "
->
-  <div className="bg-gray-50 hover:shadow-lg transition rounded-md shadow-md h-full flex flex-col">
-    <img
-      src={song.image?.[song.image.length - 1]?.url}
-      alt={song.name}
-      className="
-        w-full 
-        h-48 
-        sm:h-40 
-        md:h-48 
-        lg:h-56 
-        object-cover 
-        rounded-t-md
-        mb-2
-      "
-    />
-    <div className="px-2 pb-3 flex-1 flex flex-col">
-      <h2 className="
-        text-blue-700 
-        font-semibold 
-        text-base 
-        sm:text-lg 
-        truncate
-      ">
-        {song.name}
-      </h2>
-      <p className="
-        text-gray-600 
-        text-xs 
-        sm:text-sm 
-        mt-1
-      ">
-        {song.artists?.primary?.map((a) => a.name).join(", ") ||
-          song.primaryArtists}
-      </p>
-    </div>
-  </div>
-</div>
-
-        ))
-        :
-        <div>
-          <p className="text-gray-600">No favorites found. Hit thumbs up to add songs to favorites!</p>
+    <div className="bg-[#262626] min-h-screen px-6 py-12 mb-12">
+      <div className="flex justify-between items-center mt-8 mb-8">
+        <div className="flex items-center gap-4 mb-2 ">
+          <img
+            src={userData?.avatarUrl || "https://i.pravatar.cc/150?img=10"}
+            alt="User Avatar"
+            className="w-12 h-12 rounded-full"
+          />
+          <div>
+            <h2 className="text-xl font-semibold text-[#e11d48]">
+              Welcome, {userData?.displayName || "Guest"}!
+            </h2>
+          </div>
         </div>
-}
+      </div>
+      <p className="text-2xl font-semibold text-[#e11d48] mt-8 mb-4">
+        Your Favorite Songs
+      </p>
+      <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
+        {favoriteSongs.length ? (
+          favoriteSongs.map((song, index) => (
+            <LikedSong key={index} song={song} playSong={playSong} />
+          ))
+        ) : (
+          <div className="w-full flex justify-center items-center py-20">
+            <p className="text-gray-600 text-center">
+              No favorites found. Hit thumbs up to add songs to favorites!
+            </p>
+          </div>
+        )}
         {favLoading && (
           <div className="flex justify-center items-center h-64 w-full">
             <Loader />
@@ -145,27 +110,27 @@ const HomePage = ({
         )}
       </div>
 
-      <div className="flex justify-between items-center my-8 ">
-        <h1 className="text-3xl font-bold text-blue-700">Trending Songs</h1>
-        {/* <Link
-          to="/favorites"
-          className="text-blue-600 hover:underline font-medium"
-        >
-          View Favorites
-        </Link> */}
+      <div>
+        {/* <SingersSections singerName={"kk"} playSong={playSong} /> */}
+        {singersData.map((singer, index) => (
+          <div key={index} className="mt-8">
+            {/* <p className="text-2xl font-bold text-[#e11d48] mb-4">{singer}</p> */}
+            {/* Pass the singerName and playSong as props */}
+            <SingersSections
+              key={index}
+              singerName={singer}
+              playSong={playSong}
+            />
+          </div>
+        ))}
       </div>
 
-      <SongsList  songs={songsList} playSong={playSong} showIsLiked={true} />
+      <div className="flex justify-between items-center my-4 ">
+        <p className=" text-2xl font-bold text-[#e11d48]">Trending Songs</p>
+      </div>
 
-      {/* Audio Player */}
-      {/* {currentSong && (
-        <PlaySong
-          currentSong={currentSong}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-          audioRef={audioRef}
-        />
-      )} */}
+      <SongsList songs={songsList} playSong={playSong} showIsLiked={true} />
+
       {loading && (
         <div className="flex justify-center items-center h-64">
           <Loader />
