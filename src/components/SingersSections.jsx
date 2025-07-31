@@ -28,7 +28,7 @@ export const SingersSections = ({ singerName, playSong }) => {
   return (
     <div>
       <div className="flex justify-items-start gap-2">
-      <img className="h-10 rounded-full" src={singerData[0].image[2].url} alt="" />
+      <img className="h-10 rounded-full" src={singerData[0]?.image[2]?.url} alt={singerName} />
    <p className="text-2xl font-bold text-[#e11d48] mb-4">{singerName}</p>
       </div>
       <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
