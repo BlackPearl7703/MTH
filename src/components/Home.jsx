@@ -8,6 +8,7 @@ import Loader from "./loader/Loader";
 import { SingersSections } from "./SingersSections";
 import { fetchFavoritesSongsData } from "../helper-functions/fetchFavorites";
 import { singersData } from "../store/singersData";
+import { LikedSongSkeleton } from "./skeletons/LikedSkeleton";
 const HomePage = ({
   userData,
   currentSong,
@@ -28,8 +29,8 @@ const HomePage = ({
   // Fetch songs on load
   useEffect(() => {
     async function fetchSongs() {
-      setLoading(true);
       try {
+        setLoading(true);
         const query = "arijit"; // You can change this to any query you want
         const limitedQuery = `&limit=1000`; // Limit the number of results
         const response = await fetch(`${apiEndpoint}${query}${limitedQuery}`);
@@ -44,17 +45,16 @@ const HomePage = ({
           setSongsList(songs); // take only a few songs
           console.log("setting songs:", songs);
         }
+        setLoading(false);
         // console.log("Fetched songs:", songs);
       } catch (error) {
         console.error("Error fetching songs:", error);
       }
-      setLoading(false);
     }
     fetchSongs();
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     const favorites = new Set(
       JSON.parse(localStorage.getItem("favorites")) || []
     );
@@ -73,42 +73,40 @@ const HomePage = ({
   }, []);
 
   return (
-    <div className="bg-[#262626] min-h-screen px-6 py-12 mb-12">
-      <div className="flex justify-between items-center mt-8 mb-8">
+    <div className="bg-[#262626] min-h-screen px-6 py-12 mb-8">
+      <div className="flex justify-between items-center mt-8 mb-4">
         <div className="flex items-center gap-4 mb-2 ">
           <img
             src={userData?.avatarUrl || "https://i.pravatar.cc/150?img=10"}
             alt="User Avatar"
-            className="w-12 h-12 rounded-full"
+            className=" h-18 rounded-full"
           />
           <div>
-            <h2 className="text-xl font-semibold text-[#e11d48]">
+            <h2 className="text-xl  text-[#e11d48]">
               Welcome, {userData?.displayName || "Guest"}!
             </h2>
+            <p className="text-3xl font-semibold text-[#e11d48] ">
+              Listen Again
+            </p>
           </div>
         </div>
       </div>
-      <p className="text-2xl font-semibold text-[#e11d48] mt-8 mb-4">
-        Your Favorite Songs
-      </p>
-      <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
-        {favoriteSongs.length ? (
-          favoriteSongs.map((song, index) => (
+
+      {favLoading ? (
+        <div className="flex">
+          {Array(3)
+            .fill(0)
+            .map((_, idx) => (
+              <LikedSongSkeleton key={idx} />
+            ))}
+        </div>
+      ) : (
+        <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
+          {favoriteSongs.map((song, index) => (
             <LikedSong key={index} song={song} playSong={playSong} />
-          ))
-        ) : (
-          <div className="w-full flex justify-center items-center py-20">
-            <p className="text-gray-600 text-center">
-              No favorites found. Hit thumbs up to add songs to favorites!
-            </p>
-          </div>
-        )}
-        {favLoading && (
-          <div className="flex justify-center items-center h-64 w-full">
-            <Loader />
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
       <div>
         {/* <SingersSections singerName={"kk"} playSong={playSong} /> */}
@@ -131,11 +129,11 @@ const HomePage = ({
 
       <SongsList songs={songsList} playSong={playSong} showIsLiked={true} />
 
-      {loading && (
-        <div className="flex justify-center items-center h-64">
+      {/* {loading && (
+        <div className=" absolute z-20 flex justify-center items-center h-64">
           <Loader />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

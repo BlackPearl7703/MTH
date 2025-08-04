@@ -22,7 +22,9 @@ const FavoritesPage = ({ playSong, songsList, setSongsList }) => {
     }
 
     const fetchFavorites = async () => {
+      if (songsList.size() > 0) return;
       setLoading(true);
+
       const fetchedSongs = await fetchFavoritesSongsData(favorites);
       // add songIndex to each song
       fetchedSongs.forEach((song, index) => {
@@ -32,19 +34,17 @@ const FavoritesPage = ({ playSong, songsList, setSongsList }) => {
       setLoading(false);
     };
     // if(favorites.size === 0) {
-      fetchFavorites();
+    fetchFavorites();
     // }
   }, []);
 
   // console.log("favoriteSongs", favoriteSongs);
 
   return (
-    <div className="bg-white min-h-screen px-6 py-12">
+    <div className=" min-h-screen px-6 py-12 mt-12">
       {/* {loading && <Loader/>} */}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-blue-700">
-          Your Favorite Songs
-        </h1>
+      <div className="flex justify-between items-center mb-8 ">
+        <h1 className="text-3xl font-bold text-[#e11d48]">Favorites</h1>
         <Link to="/" className="text-blue-600 hover:underline font-medium">
           Back to Home
         </Link>

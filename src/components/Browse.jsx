@@ -20,7 +20,7 @@ const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong ,playS
   
 
   return (
-    <div className="min-h-screen px-6 py-12">
+    <div className="min-h-screen px-6 py-12 mt-12">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-[#a8a29e]">
           Results for <span className="text-[#e11d48]">{query}</span>
