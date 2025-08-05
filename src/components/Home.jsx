@@ -9,6 +9,7 @@ import { SingersSections } from "./SingersSections";
 import { fetchFavoritesSongsData } from "../helper-functions/fetchFavorites";
 import { singersData } from "../store/singersData";
 import { LikedSongSkeleton } from "./skeletons/LikedSkeleton";
+import { NoFavorites } from "./error-handlers/Nofavorites";
 const HomePage = ({
   userData,
   currentSong,
@@ -103,8 +104,23 @@ const HomePage = ({
       ) : (
         <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
           {favoriteSongs.map((song, index) => (
-            <LikedSong key={index} song={song} playSong={playSong} />
+            // <LikedSong key={index} song={song} playSong={playSong} />
+            <LikedSong
+              key={index}
+              song={song}
+              playSong={playSong}
+              className="min-w-[120px] max-w-[140px] sm:min-w-[140px] sm:max-w-[160px]"
+            />
           ))}
+
+          {!favoriteSongs.length && (
+            <div className="flex flex-col items-center justify-center h-full w-screen text-center space-y-4">
+              <NoFavorites />
+              <p className="text-2xl sm:text-3xl text-[#a8a29e] ">
+                Start listening to add here
+              </p>
+            </div>
+          )}
         </div>
       )}
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Song } from "./Song";
+import { Song } from "./Songs";
 
 const SongsList = ({ songs, playSong, showIsLiked }) => {
   const isThisSongInFavorites = (songID) => {

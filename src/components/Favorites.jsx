@@ -22,7 +22,7 @@ const FavoritesPage = ({ playSong, songsList, setSongsList }) => {
     }
 
     const fetchFavorites = async () => {
-      if (songsList.size() > 0) return;
+      if (songsList.size > 0) return;
       setLoading(true);
 
       const fetchedSongs = await fetchFavoritesSongsData(favorites);
@@ -50,11 +50,11 @@ const FavoritesPage = ({ playSong, songsList, setSongsList }) => {
         </Link>
       </div>
 
-      {loading && (
+      {/* {loading && (
         <div className="flex justify-center items-center h-64">
           <Loader />
         </div>
-      )}
+      )} */}
       {!loading && songsList.length === 0 && (
         <p className="text-gray-600">No favorites found.</p>
       )}

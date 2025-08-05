@@ -103,7 +103,7 @@ const MusicNavbar = ({
 
   {/* Mobile Dropdown */}
   {mobileMenuOpen && (
-    <div className="md:hidden bg-[#f3f4f6] shadow-lg px-4 py-4 space-y-4">
+    <div className="md:hidden bg-transparent shadow-lg px-4 py-4 space-y-4">
       <SearchBar
         query={query}
         setQuery={setQuery}

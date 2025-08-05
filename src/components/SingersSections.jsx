@@ -46,7 +46,13 @@ export const SingersSections = ({ singerName, playSong }) => {
           <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
             {songsBySinger?.length ? (
               songsBySinger.map((song, index) => (
-                <LikedSong key={index} song={song} playSong={playSong} />
+                // <LikedSong key={index} song={song} playSong={playSong} />
+                <LikedSong
+                  key={index}
+                  song={song}
+                  playSong={playSong}
+                  className="min-w-[120px] max-w-[140px] sm:min-w-[140px] sm:max-w-[160px]"
+                />
               ))
             ) : (
               <div className="w-full flex justify-center items-center py-20">
