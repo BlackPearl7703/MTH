@@ -75,23 +75,24 @@ const HomePage = ({
 
   return (
     <div className="bg-[#262626] min-h-screen px-6 py-12 mb-8">
-      <div className="flex justify-between items-center mt-8 mb-4">
-        <div className="flex items-center gap-4 mb-2 ">
-          <img
-            src={userData?.avatarUrl || "https://i.pravatar.cc/150?img=10"}
-            alt="User Avatar"
-            className=" h-18 rounded-full"
-          />
-          <div>
-            <h2 className="text-xl  text-[#e11d48]">
-              Welcome, {userData?.displayName || "Guest"}!
-            </h2>
-            <p className="text-3xl font-semibold text-[#e11d48] ">
-              Listen Again
-            </p>
-          </div>
-        </div>
-      </div>
+     <div className="flex flex-col sm:flex-row items-center sm:justify-between mt-6 sm:mt-8 mb-4 gap-4 sm:gap-6">
+  <div className="flex items-center gap-4">
+    <img
+      src={userData?.avatarUrl || "https://i.pravatar.cc/150?img=10"}
+      alt="User Avatar"
+      className="h-20 w-20 rounded-full object-cover"
+    />
+    <div>
+      <h2 className="text-lg sm:text-xl text-[#e11d48]">
+        Welcome, {userData?.displayName || "Guest"}!
+      </h2>
+      <p className="text-2xl sm:text-3xl font-semibold text-[#e11d48]">
+        Listen Again
+      </p>
+    </div>
+  </div>
+</div>
+
 
       {favLoading ? (
         <div className="flex">
