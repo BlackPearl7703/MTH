@@ -20,6 +20,8 @@ const HomePage = ({
   playSong,
   songsList,
   setSongsList,
+  favorites,
+  setFavorites
   // query,
 }) => {
   // const [songs, setSongs] = useState([]);
@@ -56,9 +58,7 @@ const HomePage = ({
   }, []);
 
   useEffect(() => {
-    const favorites = new Set(
-      JSON.parse(localStorage.getItem("favorites")) || []
-    );
+   
     const fetchFavorites = async () => {
       setFavLoading(true);
       const fetchedSongs = await fetchFavoritesSongsData(favorites);
@@ -76,21 +76,7 @@ const HomePage = ({
   return (
     <div className="bg-[#262626] min-h-screen px-6 py-12 mb-8">
      <div className="flex flex-col sm:flex-row items-center sm:justify-between mt-6 sm:mt-8 mb-4 gap-4 sm:gap-6">
-  {/* <div className="flex items-center gap-4">
-    <img
-      src={userData?.avatarUrl || "https://i.pravatar.cc/150?img=10"}
-      alt="User Avatar"
-      className="h-20 w-20 rounded-full object-cover"
-    />
-    <div>
-      <h2 className="text-lg sm:text-xl text-[#e11d48]">
-        Welcome, {userData?.displayName || "Guest"}!
-      </h2>
-      <p className="text-2xl sm:text-3xl font-semibold text-[#e11d48]">
-        Listen Again
-      </p>
-    </div>
-  </div> */}
+ 
 </div>
 
 <div>
@@ -120,7 +106,7 @@ const HomePage = ({
       ) : (
         <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
           {favoriteSongs.map((song, index) => (
-            // <LikedSong key={index} song={song} playSong={playSong} />
+          
             <LikedSong
               key={index}
               song={song}
@@ -133,7 +119,7 @@ const HomePage = ({
             <div className="flex flex-col items-center justify-center h-full w-screen text-center space-y-4">
               <NoFavorites />
               <p className="text-2xl sm:text-3xl text-[#a8a29e] ">
-                Start listening to add here
+                Hit ❤️ to add here
               </p>
             </div>
           )}

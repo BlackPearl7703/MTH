@@ -8,14 +8,15 @@ import { useState, useRef } from "react";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/Profile";
 import Login from "./components/Login";
+import { useEffect } from "react";
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
   const [songsList, setSongsList] = useState([]); // This state is not used in the current code
-  console.log("Songs List in App:", songsList);
+  // console.log("Songs List in App:", songsList);
   const [query, setQuery] = useState("");
   // const [searchResults, setSearchResults] = useState([]);
-  console.log(query);
-  console.log("Current song in App:", currentSong);
+  // console.log(query);
+  // console.log("Current song in App:", currentSong);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const playSong = (song) => {
@@ -25,6 +26,12 @@ function App() {
   };
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") ? true : false);
   const [userData, setUserData] = useState(localStorage.getItem("user")?? null);
+ const [favorites, setFavorites] = useState(() => {
+     return JSON.parse(localStorage.getItem("favorites")) || [];
+  });
+useEffect(() => {
+  console.log('Favorites changed:', favorites);
+}, [favorites]);
 
   return (
     <>
@@ -47,6 +54,7 @@ function App() {
           path="/"
           element={
             <HomePage
+
               userData={userData}
               currentSong={currentSong}
               setCurrentSong={setCurrentSong}
@@ -56,6 +64,8 @@ function App() {
               playSong={playSong}
               songsList={songsList}
               setSongsList={setSongsList}
+              favorites={favorites}
+              setFavorites={setFavorites}
             />
           }
         />
@@ -63,6 +73,7 @@ function App() {
           path="/favorites"
           element={
             <FavoritesPage
+            favorites={favorites}
               playSong={playSong}
               songsList={songsList}
               setSongsList={setSongsList}
@@ -103,6 +114,8 @@ function App() {
           setIsPlaying={setIsPlaying}
           audioRef={audioRef}
           songsList={songsList}
+          favorites={favorites}
+          setFavorites={setFavorites}
         />
       )}
        </div>

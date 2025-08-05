@@ -3,12 +3,12 @@ import { LikedSong } from "./LikedSong";
 export const Song = ({
   songs,
   playSong,
-  addToFavorites,
-  removeFromFavorites,
+  // addToFavorites,
+  // removeFromFavorites,
   showIsLiked,
   isThisSongInFavorites,
 }) => {
-  console.log(songs);
+  // console.log(songs);
   return (
 
     <div className="grid justify-items-start gap-2  grid-cols-[repeat(auto-fit,minmax(140px,1fr))] ">

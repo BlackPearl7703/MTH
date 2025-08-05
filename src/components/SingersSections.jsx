@@ -28,7 +28,7 @@ export const SingersSections = ({ singerName, playSong }) => {
     fetchSongs();
   }, []);
 
-  console.log("SingersSections", songsBySinger);
+  // console.log("SingersSections", songsBySinger);
   return (
     <div>
       {!loading ? (

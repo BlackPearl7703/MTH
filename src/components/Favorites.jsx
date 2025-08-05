@@ -7,11 +7,11 @@ import Loader from "./loader/Loader";
 
 import SongsList from "./SongsList";
 import { fetchFavoritesSongsData } from "../helper-functions/fetchFavorites";
-const FavoritesPage = ({ playSong, songsList, setSongsList }) => {
+const FavoritesPage = ({ playSong, songsList, setSongsList,favorites }) => {
   // const [favoriteSongs, setFavoriteSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   // e.g. load JSON from file or localStorage
-  let favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
+  // let favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
   // console.log("favorites", favorites);
 
   useEffect(() => {

@@ -7,27 +7,29 @@ const PlaySong = ({
   setIsPlaying,
   audioRef,
   songsList,
+  favorites,
+  setFavorites
 }) => {
   const [currentTime, setCurrentTime] = useState(0);
-  const [favorites, setFavorites] = useState(() => {
-    return new Set(JSON.parse(localStorage.getItem("favorites")) || []);
-  });
+  // const [favorites, setFavorites] = useState(() => {
+  //   return new Set(JSON.parse(localStorage.getItem("favorites")) || []);
+  // });
 
   // --- Favorites Logic ---
-  const isThisSongInFavorites = (songID) => favorites.has(songID);
+  const isThisSongInFavorites = (songID) => favorites.includes(songID);
 
-  const addToFavorites = (songID) => {
-    const updated = new Set(favorites);
-    updated.add(songID);
-    localStorage.setItem("favorites", JSON.stringify([...updated]));
+  const addToFavorites = (songId) => {
+ if (!favorites.includes(songId)) {
+    const updated = [...favorites, songId];
     setFavorites(updated);
+    localStorage.setItem("favorites", JSON.stringify(updated));
+  }
   };
 
-  const removeFavorites = (songID) => {
-    const updated = new Set(favorites);
-    updated.delete(songID);
-    localStorage.setItem("favorites", JSON.stringify([...updated]));
-    setFavorites(updated);
+  const removeFavorites = (songId) => {
+     const updated = favorites.filter((id) => id !== songId);
+  setFavorites(updated);
+  localStorage.setItem("favorites", JSON.stringify(updated));
   };
 
   // --- Song Navigation ---

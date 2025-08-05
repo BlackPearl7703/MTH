@@ -52,8 +52,8 @@ const SongsList = ({ songs, playSong, showIsLiked }) => {
       isThisSongInFavorites={isThisSongInFavorites}
       songs={songs}
       playSong={playSong}
-      addToFavorites={addToFavorites}
-      removeFromFavorites={removeFromFavorites}
+      // addToFavorites={addToFavorites}
+      // removeFromFavorites={removeFromFavorites}
     />
   );
 };
