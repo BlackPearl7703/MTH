@@ -7,7 +7,7 @@ import Loader from "./loader/Loader";
 
 import SongsList from "./SongsList";
 import { fetchFavoritesSongsData } from "../helper-functions/fetchFavorites";
-const FavoritesPage = ({ playSong, songsList, setSongsList,favorites }) => {
+const FavoritesPage = ({ playSong, songsList, setSongsList, favorites }) => {
   // const [favoriteSongs, setFavoriteSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   // e.g. load JSON from file or localStorage
@@ -55,9 +55,9 @@ const FavoritesPage = ({ playSong, songsList, setSongsList,favorites }) => {
           <Loader />
         </div>
       )} */}
-      {!loading && songsList.length === 0 && (
+      {/* {!loading && songsList.length === 0 && (
         <p className="text-gray-600">No favorites found.</p>
-      )}
+      )} */}
 
       {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"> */}
 

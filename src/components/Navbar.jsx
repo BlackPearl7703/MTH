@@ -53,7 +53,7 @@ const MusicNavbar = ({
 
   return (
     <>
-   <nav className="fixed top-0 left-0 w-full bg-[#9ca3af] z-50 shadow-md">
+   <nav className="font-grenzeGotisch fixed top-0 left-0 w-full bg-[#9ca3af] z-50 shadow-md">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center h-16">
       {/* Logo */}
@@ -112,7 +112,7 @@ const MusicNavbar = ({
         setCurrentSong={setCurrentSong}
         currentSong={currentSong}
       />
-      <Link to="/" className="block text-gray-700 hover:text-[#e11d48] text-base" onClick={() => setMobileMenuOpen(false)}>
+      <Link to="/" className=" block text-gray-700 hover:text-[#e11d48] text-base" onClick={() => setMobileMenuOpen(false)}>
         <i className="fa-solid fa-house mr-2" /> Home
       </Link>
       <Link to="/favorites" className="block text-gray-700 hover:text-[#e11d48] text-base" onClick={() => setMobileMenuOpen(false)}>

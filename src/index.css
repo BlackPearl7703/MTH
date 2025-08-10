@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+body{
+ font-family: "Signika Negative", sans-serif;
+}
+
+
+
+h3{
+  font-family: "Grenze Gotisch", serif;
+}
+
+
+
+
 @layer utilities {
   /* For WebKit browsers (Chrome, Safari) */
   .scrollbar-thin::-webkit-scrollbar {

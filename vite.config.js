@@ -8,6 +8,13 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
+  theme: {
+    extend: {
+      fontFamily: {
+         grenzeGotisch: ["'Grenze Gotisch'", "serif"], // <-- key matches class name
+      },
+    },
+  },
 
   plugins: [react(), tailwindcss(), scrollbar],
 });

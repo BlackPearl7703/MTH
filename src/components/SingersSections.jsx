@@ -39,9 +39,9 @@ export const SingersSections = ({ singerName, playSong }) => {
               src={singerData[0]?.image[2]?.url}
               alt={singerName}
             />
-            <p className="text-2xl font-bold text-[#e11d48] mb-4">
+            <h3 className="text-2xl font-bold text-[#e11d48] mb-4">
               {singerName}
-            </p>
+            </h3>
           </div>
           <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
             {songsBySinger?.length ? (

@@ -14,7 +14,7 @@ export const LikedSong = ({ song, playSong, className = '' }) => {
       </div>
 
       <div className="pt-2 flex flex-col gap-0.5">
-        <h2 className="text-xs text-[#e7e5e4] truncate">{song.name}</h2>
+        <p className="text-xs text-[#e7e5e4] truncate">{song.name}</p>
         <p className="text-xs text-[#a8a29e] truncate">
           {song.artists?.primary?.map((a) => a.name).join(", ") ||
             song.primaryArtists}

@@ -24,101 +24,118 @@ function App() {
     setIsPlaying(true);
     setTimeout(() => audioRef.current?.play(), 100); // Delay to allow src update
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token") ? true : false);
-  const [userData, setUserData] = useState(localStorage.getItem("user")?? null);
- const [favorites, setFavorites] = useState(() => {
-     return JSON.parse(localStorage.getItem("favorites")) || [];
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+  const [userData, setUserData] = useState(() => {
+  const user = localStorage.getItem("user");
+  try {
+    return user ? JSON.parse(user) : null;
+  } catch (e) {
+    console.error("Failed to parse user data", e);
+    return {};
+  }
+});
+
+  console.log(userData)
+  const [favorites, setFavorites] = useState(() => {
+    return JSON.parse(localStorage.getItem("favorites") ?? []) || [];
   });
-useEffect(() => {
-  console.log('Favorites changed:', favorites);
-}, [favorites]);
+ 
+ 
 
   return (
     <>
-    <div className="bg-[#1f2937] min-h-screen text-white">
-
-   
-      <MusicNavbar
-        songsList={songsList}
-        setSongsList={setSongsList}
-        currentSong={currentSong}
-        setCurrentSong={setCurrentSong}
-        query={query}
-        setQuery={setQuery}
-        // searchResults={searchResults} setSearchResults={setSearchResults}
-      />
-      {/* <HomePage /> */}
-
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <HomePage
-
-              userData={userData}
-              currentSong={currentSong}
-              setCurrentSong={setCurrentSong}
-              isPlaying={isPlaying}
-              setIsPlaying={setIsPlaying}
-              audioRef={audioRef}
-              playSong={playSong}
-              songsList={songsList}
-              setSongsList={setSongsList}
-              favorites={favorites}
-              setFavorites={setFavorites}
-            />
-          }
-        />
-        <Route
-          path="/favorites"
-          element={
-            <FavoritesPage
-            favorites={favorites}
-              playSong={playSong}
-              songsList={songsList}
-              setSongsList={setSongsList}
-            />
-          }
-        />
-        {/* <Route path="/play/:id" element={<div>Play Song Page</div>} /> */}
-        <Route
-          path="/browse"
-          element={
-            <BrowseMusic
-              query={query}
-              searchResults={songsList}
-              playSong={playSong}
-              currentSong={currentSong}
-              setCurrentSong={setCurrentSong}
-            />
-          }
-        />
-        <Route
-          path="/user"
-          element={isLoggedIn ? <UserProfile user={userData} /> : 
-          // <SignUp setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
-          <Login setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
-        }
-        />
-        <Route
-          path="/signup"
-          element={<SignUp setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />}
-        />
-        <Route path="*" element={<div>404 Not Found</div>} />
-      </Routes>
-      {currentSong && (
-        <PlaySong
+      <div className="bg-[#1f2937] min-h-screen text-white">
+        <MusicNavbar
+          songsList={songsList}
+          setSongsList={setSongsList}
           currentSong={currentSong}
           setCurrentSong={setCurrentSong}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-          audioRef={audioRef}
-          songsList={songsList}
-          favorites={favorites}
-          setFavorites={setFavorites}
+          query={query}
+          setQuery={setQuery}
+          // searchResults={searchResults} setSearchResults={setSearchResults}
         />
-      )}
-       </div>
+        {/* <HomePage /> */}
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HomePage
+                userData={userData}
+                currentSong={currentSong}
+                setCurrentSong={setCurrentSong}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+                audioRef={audioRef}
+                playSong={playSong}
+                songsList={songsList}
+                setSongsList={setSongsList}
+                favorites={favorites}
+                setFavorites={setFavorites}
+              />
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <FavoritesPage
+                favorites={favorites}
+                playSong={playSong}
+                songsList={songsList}
+                setSongsList={setSongsList}
+              />
+            }
+          />
+          {/* <Route path="/play/:id" element={<div>Play Song Page</div>} /> */}
+          <Route
+            path="/browse"
+            element={
+              <BrowseMusic
+                query={query}
+                searchResults={songsList}
+                playSong={playSong}
+                currentSong={currentSong}
+                setCurrentSong={setCurrentSong}
+              />
+            }
+          />
+          <Route
+            path="/user"
+            element={
+              isLoggedIn ? (
+                <UserProfile user={userData} />
+              ) : (
+                // <SignUp setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
+                <Login
+                  setIsLoggedIn={setIsLoggedIn}
+                  setUserData={setUserData}
+                />
+              )
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <SignUp setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
+            }
+          />
+          <Route path="*" element={<div>404 Not Found</div>} />
+        </Routes>
+        {currentSong && (
+          <PlaySong
+            currentSong={currentSong}
+            setCurrentSong={setCurrentSong}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+            audioRef={audioRef}
+            songsList={songsList}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
+        )}
+      </div>
     </>
   );
 }

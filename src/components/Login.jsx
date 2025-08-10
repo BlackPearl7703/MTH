@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const Login = ({ setIsLoggedIn, setUserData }) => {
   const [formData, setFormData] = useState(null);
   const navigate = useNavigate();
@@ -12,6 +13,9 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
       [e.target.id]: e.target.value,
     }));
   };
+  console.log("hello prince")
+ 
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -28,6 +32,7 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
         navigate("/user");
       })
       .catch((error) => {
+        
         console.error("Login failed", error);
       });
   };

@@ -125,7 +125,7 @@ const PlaySong = ({
           className="h-2 bg-[#e11d48] relative"
           style={{ width: `${progressPercent}%` }}
         >
-          <div className="h-3 w-3 rounded-full bg-white border border-gray-400 absolute right-0 top-1/2 -translate-y-1/2 shadow" />
+          <div className="h-5 w-3 rounded-full bg-[#d6d3d1] border border-[#a8a29e] absolute -right-1 top-1/2 -translate-y-1/2 shadow" />
         </div>
       </div>
 
@@ -144,9 +144,9 @@ const PlaySong = ({
             className={`w-12 h-12 rounded `}
           />
           <div className="overflow-hidden">
-            <h3 className="text-sm font-medium text-black truncate" title={currentSong.name}>
+            <h2 className="text-sm font-medium text-black truncate" title={currentSong.name}>
               {currentSong.name}
-            </h3>
+            </h2>
             <p className="text-xs text-gray-800 truncate">
               {currentSong.artists?.primary?.map((a) => a.name).join(", ") ||
                 currentSong.primaryArtists}

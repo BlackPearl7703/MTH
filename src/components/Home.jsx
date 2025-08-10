@@ -87,12 +87,12 @@ const HomePage = ({
       className="h-15 rounded-full object-cover"
     />
     <div>
-      <h2 className="text-lg sm:text-xl text-[#e11d48]">
+      <h3 className="text-lg sm:text-xl text-[#e11d48]">
         Welcome, {userData?.displayName || "Guest"}!
-      </h2>
-      <p className="text-2xl sm:text-3xl font-semibold text-[#e11d48]">
+      </h3>
+      <h2 className="text-2xl sm:text-3xl font-semibold text-[#e11d48]">
         Listen Again
-      </p>
+      </h2>
     </div>
   </div>
       {favLoading ? (
