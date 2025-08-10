@@ -38,9 +38,14 @@ function App() {
 });
 
   console.log(userData)
-  const [favorites, setFavorites] = useState(() => {
-    return JSON.parse(localStorage.getItem("favorites") ?? []) || [];
-  });
+ const [favorites, setFavorites] = useState(() => {
+  try {
+    return JSON.parse(localStorage.getItem("favorites") || "[]");
+  } catch {
+    return [];
+  }
+});
+
  
  
 
