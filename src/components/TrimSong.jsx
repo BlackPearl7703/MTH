@@ -114,7 +114,7 @@ export default function AudioTrimmer({ song }) {
     const url = URL.createObjectURL(wavBlob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${currentSong?.name || "trimmed"}.wav`;
+    a.download = `${song?.name || "trimmed"}.wav`;
     a.click();
     URL.revokeObjectURL(url);
   };
