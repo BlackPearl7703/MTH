@@ -15,6 +15,9 @@ export default defineConfig({
       },
     },
   },
+   optimizeDeps: {
+    include: ["@ffmpeg/ffmpeg"]
+  },
 
   plugins: [react(), tailwindcss(), scrollbar],
 });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { LikedSong } from "./LikedSong"; // Import the LikedSong component
 import { LikedSongSkeleton } from "./skeletons/LikedSkeleton";
-export const SingersSections = ({ singerName, playSong }) => {
+export const SingersSections = ({ singerName, playSong,currentSong }) => {
   const [songsBySinger, setSongsBySinger] = useState([]);
   const [singerData, setSingerData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -50,6 +50,7 @@ export const SingersSections = ({ singerName, playSong }) => {
                 <LikedSong
                   key={index}
                   song={song}
+                  currentSong={currentSong}
                   playSong={playSong}
                   className="min-w-[120px] max-w-[140px] sm:min-w-[140px] sm:max-w-[160px]"
                 />

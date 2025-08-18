@@ -97,7 +97,7 @@ const HomePage = ({
   </div>
       {favLoading ? (
         <div className="flex">
-          {Array(3)
+          {Array(5)
             .fill(0)
             .map((_, idx) => (
               <LikedSongSkeleton key={idx} />
@@ -110,7 +110,9 @@ const HomePage = ({
             <LikedSong
               key={index}
               song={song}
+              isPlaying={isPlaying}
               playSong={playSong}
+              currentSong={currentSong}
               className="min-w-[120px] max-w-[140px] sm:min-w-[140px] sm:max-w-[160px]"
             />
           ))}
@@ -137,6 +139,7 @@ const HomePage = ({
             {/* Pass the singerName and playSong as props */}
             <SingersSections
               key={index}
+              currentSong={currentSong}
               singerName={singer}
               playSong={playSong}
             />
@@ -148,7 +151,7 @@ const HomePage = ({
         <p className=" text-2xl font-bold text-[#e11d48]">Trending Songs</p>
       </div>
 
-      <SongsList songs={songsList} playSong={playSong} showIsLiked={true} />
+      <SongsList songs={songsList} playSong={playSong} currentSong={currentSong} showIsLiked={true} />
 
       {/* {loading && (
         <div className=" absolute z-20 flex justify-center items-center h-64">

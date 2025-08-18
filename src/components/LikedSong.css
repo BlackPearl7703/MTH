@@ -1,0 +1,11 @@
+@keyframes wave {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
+}
+
+.animate-wave {
+  display: inline-block;
+  animation: wave 0.8s infinite ease-in-out;
+}
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-400 { animation-delay: 0.4s; }

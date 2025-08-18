@@ -8,7 +8,7 @@ import { useState, useRef } from "react";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/Profile";
 import Login from "./components/Login";
-import { useEffect } from "react";
+import AudioTrimmer from "./components/TrimSong";
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
   const [songsList, setSongsList] = useState([]); // This state is not used in the current code
@@ -37,7 +37,7 @@ function App() {
   }
 });
 
-  console.log(userData)
+  // console.log(userData)
  const [favorites, setFavorites] = useState(() => {
   try {
     return JSON.parse(localStorage.getItem("favorites") || "[]");
@@ -45,9 +45,6 @@ function App() {
     return [];
   }
 });
-
- 
- 
 
   return (
     <>
@@ -125,6 +122,12 @@ function App() {
             element={
               <SignUp setIsLoggedIn={setIsLoggedIn} setUserData={setUserData} />
             }
+          />
+          <Route
+          path="/trim"
+          element={
+            <AudioTrimmer song={currentSong}/>
+          }
           />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>

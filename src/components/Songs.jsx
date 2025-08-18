@@ -4,6 +4,8 @@ import { NoFavorites } from "./error-handlers/Nofavorites";
 export const Song = ({
   songs,
   playSong,
+  currentSong,
+  isPlaying,
   // addToFavorites,
   // removeFromFavorites,
   showIsLiked,
@@ -27,7 +29,9 @@ export const Song = ({
             <LikedSong
               key={song.id}
               song={song}
+              currentSong={currentSong}
               playSong={playSong}
+              isPlaying={isPlaying}
               className="min-w-[120px] max-w-[140px] sm:min-w-[140px] sm:max-w-[160px]"
             />
           ))

@@ -1,7 +1,7 @@
 import React from "react";
 import { Song } from "./Songs";
 
-const SongsList = ({ songs, playSong, showIsLiked }) => {
+const SongsList = ({ songs,isPlaying, playSong,currentSong, showIsLiked }) => {
   const isThisSongInFavorites = (songID) => {
     let favorites = new Set(
       JSON.parse(localStorage.getItem("favorites")) || []
@@ -51,7 +51,10 @@ const SongsList = ({ songs, playSong, showIsLiked }) => {
       showIsLiked={showIsLiked}
       isThisSongInFavorites={isThisSongInFavorites}
       songs={songs}
+      
+      currentSong={currentSong}
       playSong={playSong}
+      isPlaying={isPlaying}
       // addToFavorites={addToFavorites}
       // removeFromFavorites={removeFromFavorites}
     />
