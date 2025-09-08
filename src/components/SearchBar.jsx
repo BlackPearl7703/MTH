@@ -22,7 +22,7 @@ const SearchBar = ({
       return;
     }
 
-    const url = `http://localhost:10000/suggestion/${value}`;
+    const url = `https://mth-backend.onrender.com/suggestion/${value}`;
     axios
       .get(url)
       .then((response) => {

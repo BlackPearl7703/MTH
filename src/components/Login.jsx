@@ -13,13 +13,12 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
       [e.target.id]: e.target.value,
     }));
   };
-  console.log("hello prince")
- 
+  console.log("hello prince");
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:10000/auth/login";
+    const url = "https://mth-backend.onrender.com/auth/login";
     console.log("Form Data to be sent:", formData);
     axios
       .post(url, formData)
@@ -32,7 +31,6 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
         navigate("/user");
       })
       .catch((error) => {
-        
         console.error("Login failed", error);
       });
   };
@@ -42,7 +40,10 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
         <h2 className="text-xl font-bold mb-4">Login</h2>
         <form>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-2" htmlFor="username">
+            <label
+              className="block text-sm font-medium mb-2"
+              htmlFor="username"
+            >
               UserName
             </label>
             <input

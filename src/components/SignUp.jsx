@@ -15,7 +15,7 @@ const SignUp = ({ setIsLoggedIn,setUserData }) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:10000/users/create";
+    const url = "https://mth-backend.onrender.com/users/create";
     // add a random userId to the formData
     formData.id = String(Math.floor(Math.random() * 10000) + 1);
     console.log("Form Data to be sent:", formData);
