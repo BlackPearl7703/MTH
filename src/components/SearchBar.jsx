@@ -22,7 +22,7 @@ const SearchBar = ({
       return;
     }
 
-    const url = `http://localhost:3000/suggestion/${value}`;
+    const url = `http://localhost:10000/suggestion/${value}`;
     axios
       .get(url)
       .then((response) => {

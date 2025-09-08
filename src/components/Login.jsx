@@ -19,7 +19,7 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const url = "http://localhost:3000/auth/login";
+    const url = "http://localhost:10000/auth/login";
     console.log("Form Data to be sent:", formData);
     axios
       .post(url, formData)
