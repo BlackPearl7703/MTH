@@ -1,5 +1,6 @@
 export const singersData = [
   // make all strings data in this array
+  "Shilpa Rao",
   "Arijit Singh",
   "Armaan Malik",
   "Mohit Chauhan",
@@ -17,4 +18,5 @@ export const singersData = [
   "Neha Kakkar",
 
   "Jubin Nautiyal",
+  
 ];

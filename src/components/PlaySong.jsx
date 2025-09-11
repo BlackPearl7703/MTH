@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { Link } from "react-router-dom";
+import Progressbar from "./Progressbar";
 
 const PlaySong = ({
   setCurrentSong,
@@ -13,6 +14,7 @@ const PlaySong = ({
 }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [isDownloadClicked, setIsDownloadClicked] = useState(false);
+  const progressBarRef = useRef(null);
 
   // --- Favorites Logic ---
   const isThisSongInFavorites = (songID) => favorites.includes(songID);
@@ -100,10 +102,19 @@ const PlaySong = ({
   };
 
   const handleSeek = (e) => {
-    const rect = e.target.getBoundingClientRect();
+    // const rect = e.target.getBoundingClientRect();
+    // const clickX = e.clientX - rect.left;
+    // const percentage = clickX / rect.width;
+    // const newTime = percentage * currentSong.duration;
+    // audioRef.current.currentTime = newTime;
+    // setCurrentTime(newTime);
+    if (!progressBarRef.current) return;
+
+    const rect = progressBarRef.current.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const percentage = clickX / rect.width;
     const newTime = percentage * currentSong.duration;
+
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
   };
@@ -148,17 +159,18 @@ const PlaySong = ({
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#9ca3af] backdrop-blur-lg shadow-inner">
       {/* Progress Bar */}
-      <div
+      {/* <div
         className="h-2 w-full bg-gray-300 cursor-pointer"
         onClick={handleSeek}
       >
         <div
-          className="h-2 bg-[#e11d48] relative"
+          className="h-2 bg-[#e11d48] relative rounded-b-md"
           style={{ width: `${progressPercent}%` }}
         >
-          <div className="h-5 w-3 rounded-full bg-[#d6d3d1] border border-[#a8a29e] absolute -right-1 top-1/2 -translate-y-1/2 shadow" />
+         
         </div>
-      </div>
+      </div> */}
+      <Progressbar handleSeek={handleSeek} progressPercent={progressPercent} progressBarRef={progressBarRef} />
 
       {/* Controls and Info */}
       <div className="flex flex-col md:flex-row justify-between items-center px-3 py-2 gap-3">

@@ -4,20 +4,20 @@ import { Routes, Route } from "react-router-dom";
 import BrowseMusic from "./components/Browse";
 import FavoritesPage from "./components/Favorites";
 import PlaySong from "./components/PlaySong";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import SignUp from "./components/SignUp";
 import UserProfile from "./components/Profile";
 import Login from "./components/Login";
 import AudioTrimmer from "./components/TrimSong";
+import SongsList from "./components/SongsList";
+import { SingersSections } from "./components/SingersSections";
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
   const [songsList, setSongsList] = useState([]); // This state is not used in the current code
-  // console.log("Songs List in App:", songsList);
+
   const [query, setQuery] = useState("");
-  // const [searchResults, setSearchResults] = useState([]);
-  // console.log(query);
-  // console.log("Current song in App:", currentSong);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [singerName, setSingerName] = useState(null);
   const audioRef = useRef(null);
   const playSong = (song) => {
     setCurrentSong(song);
@@ -28,23 +28,30 @@ function App() {
     localStorage.getItem("token") ? true : false
   );
   const [userData, setUserData] = useState(() => {
-  const user = localStorage.getItem("user");
-  try {
-    return user ? JSON.parse(user) : null;
-  } catch (e) {
-    console.error("Failed to parse user data", e);
-    return {};
-  }
-});
+    const user = localStorage.getItem("user");
+    try {
+      return user ? JSON.parse(user) : null;
+    } catch (e) {
+      console.error("Failed to parse user data", e);
+      return {};
+    }
+  });
 
-  // console.log(userData)
- const [favorites, setFavorites] = useState(() => {
-  try {
-    return JSON.parse(localStorage.getItem("favorites") || "[]");
-  } catch {
-    return [];
-  }
-});
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("favorites") || "[]");
+    } catch {
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    if (currentSong) {
+      document.title = `Playing ${currentSong.name}`;
+    } else {
+      document.title = "MTH - Music that heels";
+    }
+  }, [currentSong]);
 
   return (
     <>
@@ -65,6 +72,7 @@ function App() {
             path="/"
             element={
               <HomePage
+                setSingerName={setSingerName}
                 userData={userData}
                 currentSong={currentSong}
                 setCurrentSong={setCurrentSong}
@@ -124,11 +132,17 @@ function App() {
             }
           />
           <Route
-          path="/trim"
-          element={
-            <AudioTrimmer song={currentSong}/>
-          }
+            path="/artist/:singerName"
+            element={
+              <SingersSections
+                // singerName, playSong, currentSong
+                singerName={singerName}
+                playSong={playSong}
+                currentSong={currentSong}
+              />
+            }
           />
+          <Route path="/trim" element={<AudioTrimmer song={currentSong} />} />
           <Route path="*" element={<div>404 Not Found</div>} />
         </Routes>
         {currentSong && (

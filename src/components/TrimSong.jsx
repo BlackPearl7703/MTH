@@ -20,9 +20,9 @@ export default function AudioTrimmer({ song }) {
     const ws = WaveSurfer.create({
       container: containerRef.current,
       height: 96,
-      waveColor: "#e5e7eb",
-      progressColor: "#ec4899",
-      cursorColor: "#111827",
+      waveColor: "#edf0f5",
+      progressColor: "#81838a",
+      cursorColor: "#0b51de",
       normalize: true,
       
     });
@@ -33,8 +33,8 @@ export default function AudioTrimmer({ song }) {
       RegionsPlugin.create({
         // enable click-and-drag to create a new selection
         dragSelection: {
-          slop: 5,
-          color: "rgba(236,72,153,0.25)",
+          slop: 10,
+          color: "rgba(184, 24, 243, 0.1)",
         },
       })
     );
@@ -47,9 +47,10 @@ export default function AudioTrimmer({ song }) {
     ws.on("ready", () => {
       const dur = ws.getDuration();
       const r = regions.addRegion({
-        start: 0,
-        end: Math.min(dur),
-        color: "rgba(236,72,153,0.25)",
+
+        start: dur/20,
+        end: dur/5,
+        // color: "rgba(123,56,13,0.25)",
         drag: true,
         resize: true,
       });
@@ -75,6 +76,15 @@ export default function AudioTrimmer({ song }) {
       setRegion(null);
     };
   }, [audioUrl]);
+  const [startTime,setStartTime]=useState(region?.start.toFixed(2))
+  const [endTime,setEndTime]=useState(region?.end.toFixed(2))
+  useEffect(()=>{
+     setStartTime(region?.start.toFixed(2))
+     setEndTime(region?.end.toFixed(2))
+  },[region])
+
+
+
 
   const handlePreview = () => {
     if (!wsRef.current || !region) return;
@@ -161,7 +171,7 @@ export default function AudioTrimmer({ song }) {
   }
 
 return (
-  <div className="w-screen h-screen flex flex-col justify-center items-center">
+  <div className="w-screen h-screen flex flex-col justify-center items-center px-3">
 
     <div className=" w-full max-w-3xl mx-auto p-4 rounded-xl bg-[#475569] shadow-lg">
       {/* Song Info */}
@@ -181,13 +191,13 @@ return (
       </div>
   
       {/* Waveform */}
-      <div ref={containerRef} className="w-full h-28 bg-black rounded-md" />
+      <div ref={containerRef} className="  bg-red-300 rounded-md" />
   
       {/* Start & End Time */}
       {region && (
         <div className="flex justify-between text-sm text-gray-300 mt-2">
-          <span>Start: {region.start.toFixed(2)}s</span>
-          <span>End: {region.end.toFixed(2)}s</span>
+          <span>Start: {startTime}s</span>
+          <span>End: {endTime}s</span>
         </div>
       )}
   
@@ -196,21 +206,21 @@ return (
         <button
           onClick={handlePreview}
           disabled={!region}
-          className="flex-1 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium disabled:opacity-50 transition"
+          className="flex-1 px-2 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium disabled:opacity-50 transition"
         >
-          ▶ Preview
+           Preview
         </button>
         <button
           onClick={handleTrim}
           disabled={!region}
-          className="flex-1 px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-medium disabled:opacity-50 transition"
+          className="flex-1 px-2 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white font-medium disabled:opacity-50 transition"
         >
-          ✂ Trim & Download
+            Download
         </button>
       </div>
   
       {/* Tip */}
-      <p className="text-xs text-gray-500 mt-4 text-center">
+      <p className="text-xs text-[#e11d48] mt-4 text-center">
         Drag on the waveform to select a region. Adjust edges for fine control.
       </p>
     </div>

@@ -10,7 +10,9 @@ import { fetchFavoritesSongsData } from "../helper-functions/fetchFavorites";
 import { singersData } from "../store/singersData";
 import { LikedSongSkeleton } from "./skeletons/LikedSkeleton";
 import { NoFavorites } from "./error-handlers/Nofavorites";
+import { TrendingArtists } from "./TrendingArtists";
 const HomePage = ({
+  setSingerName,
   userData,
   currentSong,
   setCurrentSong,
@@ -21,7 +23,7 @@ const HomePage = ({
   songsList,
   setSongsList,
   favorites,
-  setFavorites
+  setFavorites,
   // query,
 }) => {
   // const [songs, setSongs] = useState([]);
@@ -58,7 +60,6 @@ const HomePage = ({
   }, []);
 
   useEffect(() => {
-   
     const fetchFavorites = async () => {
       setFavLoading(true);
       const fetchedSongs = await fetchFavoritesSongsData(favorites);
@@ -75,68 +76,62 @@ const HomePage = ({
 
   return (
     <div className="bg-[#262626] min-h-screen px-6 py-12 mb-8">
-     <div className="flex flex-col sm:flex-row items-center sm:justify-between mt-6 sm:mt-8 mb-4 gap-4 sm:gap-6">
- 
-</div>
-
-<div>
- <div className="flex items-center gap-4 mb-4">
-    <img
-      src={userData?.avatarUrl || "https://i.pravatar.cc/150?img=10"}
-      alt="User Avatar"
-      className="h-15 rounded-full object-cover"
-    />
-    <div>
-      <h3 className="text-lg sm:text-xl text-[#e11d48]">
-        Welcome, {userData?.displayName || "Guest"}!
-      </h3>
-      <h2 className="text-2xl sm:text-3xl font-semibold text-[#e11d48]">
-        Listen Again
-      </h2>
-    </div>
-  </div>
-      {favLoading ? (
-        <div className="flex">
-          {Array(5)
-            .fill(0)
-            .map((_, idx) => (
-              <LikedSongSkeleton key={idx} />
-            ))}
-        </div>
-      ) : (
-        <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
-          {favoriteSongs.map((song, index) => (
-          
-            <LikedSong
-              key={index}
-              song={song}
-              isPlaying={isPlaying}
-              playSong={playSong}
-              currentSong={currentSong}
-              className="min-w-[120px] max-w-[140px] sm:min-w-[140px] sm:max-w-[160px]"
-            />
-          ))}
-
-          {!favoriteSongs.length && (
-            <div className="flex flex-col items-center justify-center h-full w-screen text-center space-y-4">
-              <NoFavorites />
-              <p className="text-2xl sm:text-3xl text-[#a8a29e] ">
-                Hit ❤️ to add here
-              </p>
-            </div>
-          )}
-        </div>
-      )}
-</div>
-
-
+      <div className="flex flex-col sm:flex-row items-center sm:justify-between mt-6 sm:mt-8 mb-4 gap-4 sm:gap-6"></div>
 
       <div>
-        {/* <SingersSections singerName={"kk"} playSong={playSong} /> */}
+        <div className="flex items-center gap-4 mb-4">
+          <img
+            src={userData?.avatarUrl || "https://i.pravatar.cc/150?img=10"}
+            alt="User Avatar"
+            className="h-15 rounded-full object-cover"
+          />
+          <div>
+            <h3 className="text-lg sm:text-xl text-[#e11d48]">
+              Welcome, {userData?.displayName || "Guest"}!
+            </h3>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-[#e11d48]">
+              Listen Again
+            </h2>
+          </div>
+        </div>
+        {favLoading ? (
+          <div className="flex">
+            {Array(5)
+              .fill(0)
+              .map((_, idx) => (
+                <LikedSongSkeleton key={idx} />
+              ))}
+          </div>
+        ) : (
+          <div className="flex scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 overflow-x-scroll">
+            {favoriteSongs.map((song, index) => (
+              <LikedSong
+                key={index}
+                song={song}
+                isPlaying={isPlaying}
+                playSong={playSong}
+                currentSong={currentSong}
+                className="min-w-[120px] max-w-[140px] sm:min-w-[140px] sm:max-w-[160px]"
+              />
+            ))}
+
+            {!favoriteSongs.length && (
+              <div className="flex flex-col items-center justify-center h-full w-screen text-center space-y-4">
+                <NoFavorites />
+                <p className="text-2xl sm:text-3xl text-[#a8a29e] ">
+                  Hit ❤️ to add here
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* <div>
+      
         {singersData.map((singer, index) => (
           <div key={index} className="mt-8">
-            {/* <p className="text-2xl font-bold text-[#e11d48] mb-4">{singer}</p> */}
-            {/* Pass the singerName and playSong as props */}
+        
             <SingersSections
               key={index}
               currentSong={currentSong}
@@ -145,19 +140,39 @@ const HomePage = ({
             />
           </div>
         ))}
+      </div> */}
+
+      {/* singers section */}
+
+      <div>
+        <TrendingArtists
+          artistNames={singersData}
+          setSingerName={setSingerName}
+        />
       </div>
 
-      <div className="flex justify-between items-center my-4 ">
-        <p className=" text-2xl font-bold text-[#e11d48]">Trending Songs</p>
-      </div>
-
-      <SongsList songs={songsList} playSong={playSong} currentSong={currentSong} showIsLiked={true} />
-
-      {/* {loading && (
-        <div className=" absolute z-20 flex justify-center items-center h-64">
-          <Loader />
+      {/* trending songs */}
+      <div>
+        <div className="flex justify-between items-center my-4 ">
+           <h2
+        className="
+    text-xl sm:text-2xl md:text-3xl lg:text-4xl
+    font-extrabold mb-4 sm:mb-6
+    text-[#e11d48] tracking-tight
+  "
+      >
+       🦊 Trending Songs
+      </h2>
+         
         </div>
-      )} */}
+
+        <SongsList
+          songs={songsList}
+          playSong={playSong}
+          currentSong={currentSong}
+          showIsLiked={true}
+        />
+      </div>
     </div>
   );
 };
