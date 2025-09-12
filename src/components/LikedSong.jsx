@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./LikedSong.css";
+import { Music } from "lucide-react";
 
 export const LikedSong = ({
   song,
@@ -25,18 +26,22 @@ export const LikedSong = ({
         <img
           src={song.image?.[song.image.length - 1]?.url}
           alt={song.name}
-          className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+          className={`w-full h-full object-cover  transition-transform duration-200 group-hover:scale-105 ${
+            isThisSongPlaying ? "opacity-50" : ""
+          }`}
         />
-        {isThisSongPlaying && (
-          // ✅ only show when same song & playing
-          
-            <div className="absolute  bottom-1 left-2 z-20 flex items-end gap-[2px] h-5">
-              <span className="w-[3px] h-2 bg-pink-600 animate-wave"></span>
-              <span className="w-[3px] h-4 bg-pink-600 animate-wave animation-delay-200"></span>
-              <span className="w-[3px] h-3 bg-pink-600 animate-wave animation-delay-400"></span>
+
+        {
+          // {console.log(currentSong?.id==song.id)}
+          isThisSongPlaying && (
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                bg-black/60 p-2 rounded-full"
+            >
+              <Music className="w-4 h-4 sm:w-4 sm:h-4 md:w-8 md:h-8 text-[#e11d48] animate-pulse" />
             </div>
-          
-        )}
+          )
+        }
       </div>
 
       <div className="pt-2 flex flex-col gap-0.5">

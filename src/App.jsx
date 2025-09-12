@@ -139,6 +139,7 @@ function App() {
                 singerName={singerName}
                 playSong={playSong}
                 currentSong={currentSong}
+                setSongsList={setSongsList}
               />
             }
           />

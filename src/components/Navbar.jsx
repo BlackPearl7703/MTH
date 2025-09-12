@@ -53,7 +53,7 @@ const MusicNavbar = ({
 
   return (
     <>
-   <nav className="font-grenzeGotisch fixed top-0 left-0 w-full bg-[#9ca3af] z-50 shadow-md">
+   <nav className="font-grenzeGotisch fixed top-0 left-0 w-full bg-[#1c1917] z-50 shadow-md">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex justify-between items-center h-16">
       {/* Logo */}
@@ -62,7 +62,7 @@ const MusicNavbar = ({
       </Link>
 
       {/* SearchBar (desktop only) */}
-      <div className="hidden md:block flex-1 px-4">
+      <div className="hidden md:block flex-1 px-4 py-2">
         <SearchBar
           query={query}
           setQuery={setQuery}

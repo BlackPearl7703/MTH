@@ -148,22 +148,22 @@ const HomePage = ({
         <TrendingArtists
           artistNames={singersData}
           setSingerName={setSingerName}
+          setSongsList={setSongsList}
         />
       </div>
 
       {/* trending songs */}
       <div>
         <div className="flex justify-between items-center my-4 ">
-           <h2
-        className="
+          <h2
+            className="
     text-xl sm:text-2xl md:text-3xl lg:text-4xl
     font-extrabold mb-4 sm:mb-6
     text-[#e11d48] tracking-tight
   "
-      >
-       🦊 Trending Songs
-      </h2>
-         
+          >
+            🦊 Trending Songs
+          </h2>
         </div>
 
         <SongsList

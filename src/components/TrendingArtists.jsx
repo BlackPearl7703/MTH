@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const TrendingArtists = ({ artistNames, setSingerName }) => {
+export const TrendingArtists = ({ artistNames, setSingerName,setSongsList }) => {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export const TrendingArtists = ({ artistNames, setSingerName }) => {
   }, [artistNames]);
 
   return (
-    <div className="my-8 pr-4">
+    <div className="my-8 ">
       <h2
         className="
     text-xl sm:text-2xl md:text-3xl lg:text-4xl
