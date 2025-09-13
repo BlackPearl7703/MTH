@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { LikedSong } from "./LikedSong"; // Import the LikedSong component
 import { LikedSongSkeleton } from "./skeletons/LikedSkeleton";
-import { Play, Share2, MoreHorizontal } from "lucide-react";
+import { Play, Share2, MoreHorizontal, Loader } from "lucide-react";
 import { Music } from "lucide-react";
 import { singersData } from "../store/singersData";
 export const SingersSections = ({
@@ -42,21 +42,22 @@ export const SingersSections = ({
 
   return (
     <div className="pt-15">
-      <div className="   w-full min-h-screen bg-gradient-to-b from-gray-800 to-black text-white ">
+      <div className="   w-full min-h-screen bg-gradient-to-b from-gray-800 to-black text-[#d6d3d1] ">
         {/* Top Section */}
         <div className="pb-5 pt-5 px-4 bg-[#9f1239]  flex flex-col md:flex-row items-center md:items-end gap-6">
           {/* Artist Image */}
-          {singerData.length ? (
+          {singerData? (
             <img
               src={singerData[0]?.image[singerData[0]?.image.length - 1]?.url}
               alt={singerName}
               className=" w-40 h-40 md:w-56 md:h-56 rounded-full object-cover shadow-lg"
             />
+            // <Loader />
           ) : (
-            <img
-              src={singerData[0]?.image[singerData[0]?.image.length - 1]?.url}
-              alt={singerName}
-              className=" w-40 h-40 md:w-56 md:h-56 rounded-full object-cover shadow-lg"
+            <div
+              // src={singerData[0]?.image[singerData[0]?.image.length - 1]?.url}
+              // alt={singerName}
+              className=" w-40 h-40 bg-white md:w-56 md:h-56 rounded-full object-cover shadow-lg"
             />
           )}
 

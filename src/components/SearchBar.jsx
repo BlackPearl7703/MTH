@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Search } from "lucide-react";
 
 const SearchBar = ({
   onSearch,
@@ -52,15 +53,15 @@ const SearchBar = ({
 
   const handleSuggestionClick = async (suggestion) => {
     setQuery(suggestion, (query) => handleSearch());
-    // handleSearch();
+    handleSearch();
   };
 
   return (
     <div className="relative w-full max-w-xl mx-auto">
       {/* Input Field with Icon */}
-      <div className="flex items-center bg-[#292524] rounded-lg px-4 py-2 shadow-sm focus-within:ring-2 focus-within:[#e11d48]">
+      <div className="flex items-center bg-[#292524] rounded-lg px-4 py-1 shadow-sm focus-within:ring-2 focus-within:[#e11d48]">
         <div className="text-gray-400 text-lg flex items-center">
-          <i className="fa-solid fa-magnifying-glass text-2xl"></i>
+          <Search />
         </div>
         <input
           type="text"

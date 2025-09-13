@@ -203,12 +203,12 @@ const PlaySong = ({
           />
           <div className="overflow-hidden flex-1">
             <h2
-              className="text-sm font-medium text-white truncate"
+              className="text-sm font-medium text-[#d6d3d1]  truncate"
               title={currentSong.name}
             >
               {currentSong.name}
             </h2>
-            <p className="text-xs text-white truncate">
+            <p className="text-xs text-[#a8a29e] truncate">
               {currentSong.artists?.primary?.map((a) => a.name).join(", ") ||
                 currentSong.primaryArtists}
             </p>
@@ -216,7 +216,7 @@ const PlaySong = ({
         </div>
 
         {/* Playback Controls + More Options */}
-        <div className="flex items-center gap-4 text-white w-full md:w-auto justify-center md:justify-end">
+        <div className="flex items-center gap-4 text-[#d6d3d1] w-full md:w-auto justify-center md:justify-end">
           <SkipBack
             className="w-6 h-6 cursor-pointer hover:text-[#e11d48]"
             onClick={playPrevSong}
@@ -249,10 +249,10 @@ const PlaySong = ({
             />
             {open && (
               <div
-                className="px-3 py-3 space-y-2 absolute mb-4 bottom-full right-0  w-auto bg-[#2d2d2d] text-white 
+                className="px-3 py-3 space-y-2 absolute mb-4 bottom-full right-0  w-auto bg-[#2d2d2d] 
                     rounded-lg shadow-lg overflow-hidden z-100"
               >
-                <div className="text-lg md:text-xl flex-shrink-0 text-white hover:text-[#e11d48]">
+                <div className="text-lg md:text-xl flex-shrink-0  hover:text-[#e11d48]">
                   {isThisSongInFavorites(currentSong.id) ? (
                     <div className="relative group">
                       <Heart
@@ -305,6 +305,7 @@ const PlaySong = ({
                   >
                     download
                   </span> */}
+
                 </div>
 
                 <div className="relative group">
@@ -326,7 +327,7 @@ const PlaySong = ({
 
                 <Link to="/trim">
                   <div className="relative group ">
-                    <Scissors className="fa-solid fa-scissors hover:text-[#e11d48] text-white text-lg md:text-xl" />
+                    <Scissors className="fa-solid fa-scissors hover:text-[#e11d48]  text-lg md:text-xl" />
 
                     {/* <span
                       className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2

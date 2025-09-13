@@ -13,11 +13,12 @@ import SongsList from "./components/SongsList";
 import { SingersSections } from "./components/SingersSections";
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
-  const [songsList, setSongsList] = useState([]); // This state is not used in the current code
+  const [songsList, setSongsList] = useState([]);
 
   const [query, setQuery] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
   const [singerName, setSingerName] = useState(null);
+  const [favoriteSongs,setFavoriteSongs]=useState([])
   const audioRef = useRef(null);
   const playSong = (song) => {
     setCurrentSong(song);
@@ -93,8 +94,8 @@ function App() {
               <FavoritesPage
                 favorites={favorites}
                 playSong={playSong}
-                songsList={songsList}
-                setSongsList={setSongsList}
+                favoriteSongs={favoriteSongs}
+                setFavoriteSongs={setFavoriteSongs}
               />
             }
           />
