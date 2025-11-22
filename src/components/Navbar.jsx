@@ -18,7 +18,7 @@ const MusicNavbar = ({
   // curl 'https://saavn.dev/api/search?query=Imagine%20Dragons'
   // https://saavn.dev/api/search/songs?query=
   console.log("currentSong in Navbar:", currentSong);
-  const apiEndpoint = "https://saavn.dev/api/search/songs?query="; // Example query
+  const apiEndpoint = "https://jiosaavn-api2-eight.vercel.app/api/search/songs?query="; // Example query
   // const [results, setResults] = React.useState([]);
   const navigate = useNavigate();
   const handleSearch = async (query) => {

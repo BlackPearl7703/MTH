@@ -19,11 +19,11 @@ export const SingersSections = ({
       setLoading(true);
 
       const limitedQuery = `&limit=1000`; // Limit the number of results
-      const apiEndpoint = "https://saavn.dev/api/search/songs?query="; // Example query
+      const apiEndpoint = "https://jiosaavn-api2-eight.vercel.app/api/search/songs?query="; // Example query
       const response = await fetch(
         `${apiEndpoint}${singerName}${limitedQuery}`
       );
-      const apiEndpoint2 = `https://saavn.dev/api/search/artists?query=${singerName}`;
+      const apiEndpoint2 = `https://jiosaavn-api2-eight.vercel.app/api/search/artists?query=${singerName}`;
       const response2 = await fetch(apiEndpoint2);
       const data2 = await response2.json();
       console.log("Fetched artist data:", data2);

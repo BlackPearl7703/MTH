@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import PlaySong from "./PlaySong"; // Import the PlaySong component
-const apiEndpoint = "https://saavn.dev/api/search/songs?query="; // Example query
+const apiEndpoint =
+  "https://jiosaavn-api2-eight.vercel.app/api/search/songs?query="; // Example query
 import { Link } from "react-router-dom"; // Import Link for navigation
 import { LikedSong } from "./LikedSong";
 import SongsList from "./SongsList";
@@ -146,7 +147,7 @@ const HomePage = ({
 
       <div>
         <TrendingArtists
-          artistNames={singersData}
+          // artistNames={singersData}
           setSingerName={setSingerName}
           setSongsList={setSongsList}
         />

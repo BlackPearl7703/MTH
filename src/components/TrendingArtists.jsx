@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { singersData } from "../store/singersData";
 
-export const TrendingArtists = ({ artistNames, setSingerName,setSongsList }) => {
+export const TrendingArtists = ({ setSingerName, setSongsList }) => {
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const artistNames = singersData;
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -12,7 +14,7 @@ export const TrendingArtists = ({ artistNames, setSingerName,setSongsList }) => 
         const results = await Promise.all(
           artistNames.map(async (name) => {
             const res = await fetch(
-              `https://saavn.dev/api/search/artists?query=${name}`
+              `https://jiosaavn-api2-eight.vercel.app/api/search/artists?query=${name}`
             );
             const data = await res.json();
             return data?.data?.results?.[0]; // take first result
@@ -31,15 +33,30 @@ export const TrendingArtists = ({ artistNames, setSingerName,setSongsList }) => 
 
   return (
     <div className="my-8 ">
-      <h2
-        className="
+      <div className="flex justify-start items-center mb-4 sm:mb-6 gap-3">
+        <h2
+          className="
     text-xl sm:text-2xl md:text-3xl lg:text-4xl
-    font-extrabold mb-4 sm:mb-6
+    font-extrabold 
     text-[#e11d48] tracking-tight
   "
-      >
-        🐱 Trending Artists
-      </h2>
+        >
+          🐱 Trending Artists
+        </h2>
+
+        <button
+          className="text-lg 
+             font-medium text-[#e11d48] 
+             border-2 border-[#e11d48] 
+             rounded-full px-2 py-1
+             cursor-pointer
+             hover:bg-[#e11d48] hover:text-white
+             focus:outline-none focus:ring-2 focus:ring-[#e11d48]/50 
+             transition-colors duration-200 ease-in-out"
+        >
+          + Artist
+        </button>
+      </div>
 
       {!loading ? (
         <div className="flex  gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900 pb-2">
