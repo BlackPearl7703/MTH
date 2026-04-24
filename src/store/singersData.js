@@ -5,7 +5,8 @@ export const singersData = [
   "Armaan Malik",
   "Mohit Chauhan",
   "Gajendra Verma",
-  "Ed Sheeran",
+  "Jonita Gandhi",
+  "Vilen",
 
   "Shreya Ghoshal",
 
@@ -18,5 +19,4 @@ export const singersData = [
   "Neha Kakkar",
 
   "Jubin Nautiyal",
-  
 ];
