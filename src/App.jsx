@@ -1,16 +1,15 @@
-import MusicNavbar from "./components/Navbar";
-import HomePage from "./components/Home";
-import { Routes, Route } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import BrowseMusic from "./components/Browse";
 import FavoritesPage from "./components/Favorites";
-import PlaySong from "./components/PlaySong";
-import { useState, useRef, useEffect } from "react";
-import SignUp from "./components/SignUp";
-import UserProfile from "./components/Profile";
+import HomePage from "./components/Home";
 import Login from "./components/Login";
-import AudioTrimmer from "./components/TrimSong";
-import SongsList from "./components/SongsList";
+import MusicNavbar from "./components/Navbar";
+import PlaySong from "./components/PlaySong";
+import UserProfile from "./components/Profile";
+import SignUp from "./components/SignUp";
 import { SingersSections } from "./components/SingersSections";
+import AudioTrimmer from "./components/TrimSong";
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
   const [songsList, setSongsList] = useState([]);
@@ -18,7 +17,7 @@ function App() {
   const [query, setQuery] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
   const [singerName, setSingerName] = useState(null);
-  const [favoriteSongs,setFavoriteSongs]=useState([])
+  const [favoriteSongs, setFavoriteSongs] = useState([]);
   const audioRef = useRef(null);
   const playSong = (song) => {
     setCurrentSong(song);
@@ -26,7 +25,7 @@ function App() {
     setTimeout(() => audioRef.current?.play(), 100); // Delay to allow src update
   };
   const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("token") ? true : false
+    localStorage.getItem("token") ? true : false,
   );
   const [userData, setUserData] = useState(() => {
     const user = localStorage.getItem("user");
@@ -45,7 +44,6 @@ function App() {
       return [];
     }
   });
-
   useEffect(() => {
     if (currentSong) {
       document.title = `Playing ${currentSong.name}`;

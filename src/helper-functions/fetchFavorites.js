@@ -1,9 +1,6 @@
 export async function fetchFavoritesSongsData(favorites) {
-  const apiEndpoint = "https://saavn.dev/api/songs?ids=";
+  const apiEndpoint = "https://saavn.sumit.co/api/songs/";
   const fetchedSongs = [];
-  //   const favorites = new Set(
-  //     JSON.parse(localStorage.getItem("favorites")) || []
-  //   );
 
   for (const id of favorites) {
     try {
@@ -15,7 +12,7 @@ export async function fetchFavoritesSongsData(favorites) {
         fetchedSongs.push(data[0]);
       }
     } catch (error) {
-      console.error("Error fetching favorite:", id, error);
+      console.error("Error fetching favorite:::", id, error);
     }
   }
   return fetchedSongs;

@@ -1,17 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
-import PlaySong from "./PlaySong"; // Import the PlaySong component
+import { useEffect, useState } from "react";
+import { fetchFavoritesSongsData } from "../helper-functions/fetchFavorites";
+import { NoFavorites } from "./error-handlers/Nofavorites";
+import { LikedSong } from "./LikedSong";
+import { LikedSongSkeleton } from "./skeletons/LikedSkeleton";
+import SongsList from "./SongsList";
+import { TrendingArtists } from "./TrendingArtists";
 const apiEndpoint =
   "https://jiosaavn-api2-eight.vercel.app/api/search/songs?query="; // Example query
-import { Link } from "react-router-dom"; // Import Link for navigation
-import { LikedSong } from "./LikedSong";
-import SongsList from "./SongsList";
-import Loader from "./loader/Loader";
-import { SingersSections } from "./SingersSections";
-import { fetchFavoritesSongsData } from "../helper-functions/fetchFavorites";
-import { singersData } from "../store/singersData";
-import { LikedSongSkeleton } from "./skeletons/LikedSkeleton";
-import { NoFavorites } from "./error-handlers/Nofavorites";
-import { TrendingArtists } from "./TrendingArtists";
 const HomePage = ({
   setSingerName,
   userData,
@@ -31,7 +26,6 @@ const HomePage = ({
   const [loading, setLoading] = useState(false);
   const [favLoading, setFavLoading] = useState(false);
   const [favoriteSongs, setFavoriteSongs] = useState([]);
-
   // Fetch songs on load
   useEffect(() => {
     async function fetchSongs() {

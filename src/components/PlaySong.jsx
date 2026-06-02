@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import Progressbar from "./Progressbar";
 import {
-  Repeat2,
-  Download,
-  Scissors,
-  Heart,
   CirclePlus,
-  Play,
+  Download,
+  EllipsisVertical,
+  Heart,
   Pause,
+  Play,
+  Repeat2,
+  Scissors,
   SkipBack,
   SkipForward,
-  EllipsisVertical,
 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import Progressbar from "./Progressbar";
 
 const PlaySong = ({
   setCurrentSong,
@@ -256,14 +256,6 @@ const PlaySong = ({
                         className="fa-solid fa-heart text-red-500 cursor-pointer"
                         onClick={() => removeFavorites(currentSong.id)}
                       ></Heart>
-
-                      {/* <span
-                        className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2
-           whitespace-nowrap text-xs text-white bg-[#e11d48] px-2 py-1
-           rounded opacity-0 group-hover:opacity-100 transition"
-                      >
-                        remove from favorites
-                      </span> */}
                     </div>
                   ) : (
                     <div className="relative group">
