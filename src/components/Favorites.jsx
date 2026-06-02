@@ -15,10 +15,6 @@ const FavoritesPage = ({
 }) => {
   const [loading, setLoading] = useState(false);
 
-  // e.g. load JSON from file or localStorage
-  // let favorites = new Set(JSON.parse(localStorage.getItem("favorites")) || []);
-  // console.log("favorites", favorites);
-
   useEffect(() => {
     const fetchFavorites = async () => {
       if (favoriteSongs.size > 0) return;
@@ -34,8 +30,6 @@ const FavoritesPage = ({
     };
     if (favoriteSongs.length === 0) fetchFavorites();
   }, []);
-
-  // console.log("favoriteSongs", favoriteSongs);
 
   return (
     <div className=" min-h-screen px-6 py-12 mt-12">

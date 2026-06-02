@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import PlaySong from "./PlaySong";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Loader from "./loader/Loader"; // Import the Loader component
 import SongsList from "./SongsList";
 // const apiEndpoint = "https://saavn.me/search/songs?query=";
 // const apiEndpoint = "https://saavn.dev/api/search/songs?query=";
 
-const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong ,playSong}) => {
-  console.log("BrowseMusic query:", query);
-  console.log("BrowseMusic searchResults:", searchResults);
-  // const [query, setQuery] = useState("");
-  // const [results, setResults] = useState([]);
+const BrowseMusic = ({
+  query,
+  searchResults,
+  currentSong,
+  setCurrentSong,
+  playSong,
+}) => {
   const [loading, setLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  // const [currentSong, setCurrentSong] = useState(null);
   const audioRef = useRef(null);
- 
-  
 
   return (
     <div className="min-h-screen px-6 py-12 mt-12">
@@ -33,12 +29,9 @@ const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong ,playS
         </Link> */}
       </div>
 
-     
-     
-
       {/* Results */}
       {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"> */}
-        {/* {searchResults.map((song) => {
+      {/* {searchResults.map((song) => {
           //   const isFavorite = favorites.some((s) => s.id === song.id);
 
           return (
@@ -67,12 +60,8 @@ const BrowseMusic = ({ query, searchResults , currentSong, setCurrentSong ,playS
             </div>
           );
         })} */}
-        {/* <SongsList  /> */}
-        <SongsList
-          songs={searchResults}
-          playSong={playSong}
-         
-        />
+      {/* <SongsList  /> */}
+      <SongsList songs={searchResults} playSong={playSong} />
       {/* </div> */}
 
       {searchResults.length === 0 && !loading && (

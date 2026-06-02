@@ -13,17 +13,14 @@ const Login = ({ setIsLoggedIn, setUserData }) => {
       [e.target.id]: e.target.value,
     }));
   };
-  console.log("hello prince");
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     const url = "https://mth-backend.onrender.com/auth/login";
-    console.log("Form Data to be sent:", formData);
     axios
       .post(url, formData)
       .then((response) => {
-        console.log("Login successful", response.data);
         localStorage.setItem("token", response.data.access_token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         setUserData(response.data.user); // Assuming response contains user data

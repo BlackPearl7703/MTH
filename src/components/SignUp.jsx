@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-const SignUp = ({ setIsLoggedIn,setUserData }) => {
+const SignUp = ({ setIsLoggedIn, setUserData }) => {
   const [formData, setFormData] = useState(null);
   const navigate = useNavigate();
 
@@ -18,11 +18,9 @@ const SignUp = ({ setIsLoggedIn,setUserData }) => {
     const url = "https://mth-backend.onrender.com/users/create";
     // add a random userId to the formData
     formData.id = String(Math.floor(Math.random() * 10000) + 1);
-    console.log("Form Data to be sent:", formData);
     axios
       .post(url, formData)
       .then((response) => {
-        console.log("Signup successful", response.data);
         localStorage.setItem("token", response.data.access_token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         setIsLoggedIn(true);
@@ -37,20 +35,20 @@ const SignUp = ({ setIsLoggedIn,setUserData }) => {
   };
 
   const randomUrl = (e) => {
-  e.preventDefault(); // prevent form submission
-  // const avatarOptions = [
-  //   "https://i.pravatar.cc/150?img=1",
-  //   "https://i.pravatar.cc/150?img=5",
-  //   "https://i.pravatar.cc/150?img=10",
-  //   "https://i.pravatar.cc/150?img=15",
-  //   "https://i.pravatar.cc/150?img=20",
-  // ];
-  // const random = avatarOptions[Math.floor(Math.random() * avatarOptions.length)];
-  setFormData((prev) => ({
-    ...prev,
-    avatarUrl: `https://avatar.iran.liara.run/public`,
-  }));
-};
+    e.preventDefault(); // prevent form submission
+    // const avatarOptions = [
+    //   "https://i.pravatar.cc/150?img=1",
+    //   "https://i.pravatar.cc/150?img=5",
+    //   "https://i.pravatar.cc/150?img=10",
+    //   "https://i.pravatar.cc/150?img=15",
+    //   "https://i.pravatar.cc/150?img=20",
+    // ];
+    // const random = avatarOptions[Math.floor(Math.random() * avatarOptions.length)];
+    setFormData((prev) => ({
+      ...prev,
+      avatarUrl: `https://avatar.iran.liara.run/public`,
+    }));
+  };
 
   return (
     <div className="mt-5 h-screen min-h-8/12 pt-4 flex items-center justify-center">

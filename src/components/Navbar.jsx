@@ -12,31 +12,25 @@ const MusicNavbar = ({
   // searchResults,
   // setSearchResults,
 }) => {
-  useEffect(() => {
-    console.log("current song is changing");
-  }, [currentSong]);
-  // curl 'https://saavn.dev/api/search?query=Imagine%20Dragons'
-  // https://saavn.dev/api/search/songs?query=
-  console.log("currentSong in Navbar:", currentSong);
-  const apiEndpoint = "https://jiosaavn-api2-eight.vercel.app/api/search/songs?query="; // Example query
-  // const [results, setResults] = React.useState([]);
+  useEffect(() => {}, [currentSong]);
+
+  const apiEndpoint =
+    "https://jiosaavn-api2-eight.vercel.app/api/search/songs?query="; // Example query
   const navigate = useNavigate();
   const handleSearch = async (query) => {
     try {
       const limitedQuery = `&limit=1000`; // Limit the number of results
       const response = await fetch(
-        `${apiEndpoint}${encodeURIComponent(query)}${limitedQuery}`
+        `${apiEndpoint}${encodeURIComponent(query)}${limitedQuery}`,
       );
       const data1 = await response.json();
       const data = data1.data;
-      console.log("Search results:", data);
       if (data.results) {
         // add songIndex to each song
         const songs = data.results.map((song, index) => ({
           ...song,
           songIndex: index + 1, // Assigning a 1-based index
         }));
-        console.log("Search results with indices:", songs);
         // setSearchResults(songs);
         setQuery(query);
         // setResults(data.results.slice(0, 20));

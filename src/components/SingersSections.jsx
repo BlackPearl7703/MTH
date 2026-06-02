@@ -19,25 +19,23 @@ export const SingersSections = ({
       setLoading(true);
 
       const limitedQuery = `&limit=1000`; // Limit the number of results
-      const apiEndpoint = "https://jiosaavn-api2-eight.vercel.app/api/search/songs?query="; // Example query
+      const apiEndpoint =
+        "https://jiosaavn-api2-eight.vercel.app/api/search/songs?query="; // Example query
       const response = await fetch(
-        `${apiEndpoint}${singerName}${limitedQuery}`
+        `${apiEndpoint}${singerName}${limitedQuery}`,
       );
       const apiEndpoint2 = `https://jiosaavn-api2-eight.vercel.app/api/search/artists?query=${singerName}`;
       const response2 = await fetch(apiEndpoint2);
       const data2 = await response2.json();
-      console.log("Fetched artist data:", data2);
       setSingerData(data2.data.results);
       const data = await response.json();
-      console.log("Fetched singerdata:", data);
       setSongsBySinger(data.data.results);
       setLoading(false);
     };
 
     fetchSongs();
   }, []);
-  console.log("singersData", singerData);
-  console.log("SingersSections", songsBySinger);
+
   setSongsList(songsBySinger);
 
   return (
@@ -46,14 +44,14 @@ export const SingersSections = ({
         {/* Top Section */}
         <div className="pb-5 pt-5 px-4 bg-[#9f1239]  flex flex-col md:flex-row items-center md:items-end gap-6">
           {/* Artist Image */}
-          {singerData? (
+          {singerData ? (
             <img
               src={singerData[0]?.image[singerData[0]?.image.length - 1]?.url}
               alt={singerName}
               className=" w-40 h-40 md:w-56 md:h-56 rounded-full object-cover shadow-lg"
             />
-            // <Loader />
           ) : (
+            // <Loader />
             <div
               // src={singerData[0]?.image[singerData[0]?.image.length - 1]?.url}
               // alt={singerName}
@@ -105,14 +103,11 @@ export const SingersSections = ({
                       alt={song.name}
                       className={`w-12 h-12 rounded-md object-cover`}
                     />
-                    {
-                      // {console.log(currentSong?.id==song.id)}
-                      currentSong?.id == song.id && (
-                        <div className="absolute top-2 right-2 bg-black/60 p-1 rounded-full">
-                          <Music className="w-6 h-6 text-[#e11d48] animate-pulse" />
-                        </div>
-                      )
-                    }
+                    {currentSong?.id == song.id && (
+                      <div className="absolute top-2 right-2 bg-black/60 p-1 rounded-full">
+                        <Music className="w-6 h-6 text-[#e11d48] animate-pulse" />
+                      </div>
+                    )}
                   </div>
                   <div>
                     <p className="font-medium">{song.name}</p>

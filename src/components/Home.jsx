@@ -41,7 +41,7 @@ const HomePage = ({
         const limitedQuery = `&limit=1000`; // Limit the number of results
         const response = await fetch(`${apiEndpoint}${query}${limitedQuery}`);
         const data = await response.json();
-        console.log("Fetched data:", data);
+
         if (data.data.results && data.data.results.length > 0) {
           // assign o based index to songs
           const songs = data.data.results.map((song, index) => ({
@@ -49,10 +49,8 @@ const HomePage = ({
             songIndex: index + 1, // Assigning a 1-based index
           }));
           setSongsList(songs); // take only a few songs
-          console.log("setting songs:", songs);
         }
         setLoading(false);
-        // console.log("Fetched songs:", songs);
       } catch (error) {
         console.error("Error fetching songs:", error);
       }

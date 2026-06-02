@@ -30,7 +30,6 @@ const PlaySong = ({
   const progressBarRef = useRef(null);
   const [open, setOpen] = useState(false);
   const [isOnRepeat, setIsOnRepeat] = useState(false);
-  // console.log(open, "open");
 
   // --- Favorites Logic ---
   const isThisSongInFavorites = (songID) => favorites.includes(songID);
@@ -73,7 +72,6 @@ const PlaySong = ({
 
   const playCurrentSong = () => {
     const index = getCurrentIndex();
-    console.log("hello from current", index);
     setCurrentSong(songsList[index]);
   };
 
@@ -174,7 +172,6 @@ const PlaySong = ({
   };
 
   const handleEnded = () => {
-    console.log("hello from ended", isOnRepeat);
     isOnRepeat ? playCurrentSong() : playNextSong();
   };
 
@@ -305,7 +302,6 @@ const PlaySong = ({
                   >
                     download
                   </span> */}
-
                 </div>
 
                 <div className="relative group">

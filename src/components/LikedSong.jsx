@@ -12,8 +12,6 @@ export const LikedSong = ({
   const [isThisSongPlaying, setIsThisSongPlaying] = useState(false);
   //  const isThisSongPlaying = currentSong?.id === song.id && isPlaying;
   useEffect(() => {
-    // console.log(currentSong,song,isPlaying)
-    console.log(currentSong?.id === song.id);
     setIsThisSongPlaying(currentSong?.id === song.id);
   }, [currentSong]);
   return (
@@ -31,17 +29,14 @@ export const LikedSong = ({
           }`}
         />
 
-        {
-          // {console.log(currentSong?.id==song.id)}
-          isThisSongPlaying && (
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+        {isThisSongPlaying && (
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
                 bg-black/60 p-2 rounded-full"
-            >
-              <Music className="w-4 h-4 sm:w-4 sm:h-4 md:w-8 md:h-8 text-[#e11d48] animate-pulse" />
-            </div>
-          )
-        }
+          >
+            <Music className="w-4 h-4 sm:w-4 sm:h-4 md:w-8 md:h-8 text-[#e11d48] animate-pulse" />
+          </div>
+        )}
       </div>
 
       <div className="pt-2 flex flex-col gap-0.5">

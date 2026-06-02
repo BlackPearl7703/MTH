@@ -13,7 +13,6 @@ const SearchBar = ({
   const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState([]);
 
-  console.log(query, "query in search bar");
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
@@ -28,7 +27,6 @@ const SearchBar = ({
       .get(url)
       .then((response) => {
         setSuggestions(response.data);
-        console.log("Search suggestions:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching search suggestions:", error);
